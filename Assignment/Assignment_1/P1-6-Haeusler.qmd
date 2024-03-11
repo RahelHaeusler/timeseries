@@ -239,3 +239,5 @@ plot(inq_last_6mths, dti,
      col = "blue")
 
 ```
+
+**Add Text**
