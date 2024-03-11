@@ -1,0 +1,188 @@
+---
+title: "P1-6-Haeusler"
+author: "Rahel Häusler"
+date: 10.04.2024 (deadline)
+format: html
+toc: true
+editor: visual
+warning: false
+error: false
+---
+
+## Preliminaries
+
+```{r}
+install.packages("data.table")
+install.packages("dplyr")
+library(data.table)
+library(dplyr)
+LCdata <- fread("LCdata.csv")
+set.seed(6)
+myLCdata <- LCdata %>% sample(5) %>% slice_sample(prop = .5)
+
+```
+
+# Task 1
+
+## Task Description:
+
+Use dplyr::glimpse() and str() to get a first impression of your data set. Download the data dictionary from Moodle, find the attributes that are present in your data set myLCdata and read the corresponding descriptions. **Try to understand their meaning in the context of peer-to-peer (P2P) loans**.
+
+```{r}
+install.packages("readxl")
+# Get a glimpse of the dataset
+glimpse(myLCdata)
+
+# Use str() function to get structure of the dataset
+str(myLCdata)
+# Load data dictionary
+data_dictionary <- read.csv("LC_DataDictionary.xlsx")
+
+# Match attributes in your dataset with descriptions from the data dictionary
+# attributes <- colnames(myLCdata)
+# matching_descriptions <- data_dictionary[data_dictionary$Attribute %in% attributes, ]
+
+# Print out descriptions of attributes
+print(matching_descriptions)
+```
+
++----------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Variable       | Description                                                                                                                                                                                                               | Meaning for P2P Loans                                                                                                                                                                                                                                                                                                                                    |
++================+===========================================================================================================================================================================================================================+==========================================================================================================================================================================================================================================================================================================================================================+
+| inq_last_6mths | The number of inquiries in past 6 months (excluding auto and mortgage inquiries)                                                                                                                                          | The number of inquiries helps the lender to evaluate the credit worthiness and credit trusteness of the borrower (e.g. may indicate overspending –\> risk of credit default)                                                                                                                                                                             |
++----------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| pub_rec        | Number of derogatory public records.                                                                                                                                                                                      | The number of derogatory public records helps the lender to assess the credit worthiness of the borrower. Furthermore, public records may be used for risk and compliance assessment of the borrower.                                                                                                                                                    |
++----------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| revol_bal      | Total credit revolving balance.\                                                                                                                                                                                          | Revolving balance have to be considered in the creditworthiness assessment. The credit line has to be considered in the debit utilization ratio which influences the risk evaluation of the loan and therefore directly imacts the interest rate. Moreover, the credit revolving balance can help to understand the financial stability of the borrower. |
+|                | A revolving credit is a credit line that remains available even as you pay the balance. Borrowers can access credit up to a certain amount and then have ongoing access to that amount of credit. Typically a credit card |                                                                                                                                                                                                                                                                                                                                                          |
++----------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| dti            | A ratio calculated using the borrower’s total monthly debt payments on the total debt obligations (excluding mortgage and the requested LC loan), divided by the borrower’s self-reported monthly income.                 | The dti is a measurement that helps lenders to assess the borrower's ability to manage their debt payment relative to their income. It provides a measure of the borrower's financial health and ability to repay their loan.                                                                                                                            |
++----------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| home_ownership | The home ownership status provided by the borrower during registration. Our values are: RENT, OWN, MORTGAGE, OTHER.                                                                                                       | The home ownership status can provide insights into the financial stability and responsibility of the borrower.                                                                                                                                                                                                                                          |
++----------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+: Extract of LC_DataDictionary
+
+# Task 2
+
+## Task Description:
+
+Use summary() and skimr::skim() to review the main statistical metrics of your attributes. What do they tell you about the attributes? **Interpret them not only statistically, but also in the domain context**.
+
+```{r}
+library(skimr)
+# Review main statistical metrics using summary()
+summary(myLCdata)
+
+# Review main statistical metrics using skim()
+skim(myLCdata)
+```
+
+# Task 3
+
+## Task Description:
+
+**Choose at least one suitable diagram type (e.g. a histogram, a scatterplot) for each of the 5 attributes in your data set and visualize it using ggplot2**. **Give your plots a professional look (e.g., add a title, make the axes labels readable, add the measurement units if available).**
+
+**Interpret each of your plots:**
+
+• What information can you read off the diagram type you chose (e.g. in a histogram you can read off range, distribution, etc.)?
+
+• What does it tell you about the attribute in the context of the attribute semantic and domain? Does it confirm your first assumptions about the attribute from task 2?
+
+```{r}
+library(ggplot2)
+
+hist(myLCdata$inq_last_6m,
+     main = "Histogram of Inquiries in Last 6 Months",
+     xlab = "Number of Inquiries",
+     ylab = "Frequency",
+     col = "skyblue",
+     border = "black",
+     xlim = c(0, 8))
+
+# Count the frequency of each category in pub_rec
+pub_rec_counts <- table(myLCdata$pub_rec)
+
+# Create a pie chart
+#pie(pub_rec_counts,
+#    main = "Pie Chart of Number of Public Records")
+
+# Count the frequency of each category in pub_rec
+#pub_rec_counts <- table(myLCdata$pub_rec)
+
+# Print the frequency distribution
+#print(pub_rec_counts)
+
+# Create a frequency distribution with binwidth=1 for pub_rec
+ggplot(myLCdata, aes(x = pub_rec)) +
+  geom_histogram(binwidth = 1, fill = "skyblue", color = "black",
+                 breaks = seq(0, 5, by = 1)) +
+  labs(title = "Frequency Distribution of Public Records",
+       x = "Number of Public Records",
+       y = "Frequency") +
+  scale_x_continuous(breaks = seq(0, 5, by = 1))
+
+# Create a histogram for revol_bal
+hist(myLCdata$revol_bal,
+     main = "Histogram of total credit revolving balance",
+     xlab = "Total credit revolving balance",
+     ylab = "Frequency",
+     col = "skyblue",
+     border = "black",
+     xlim = c(0, 300000))
+
+# Create a scatterplot for revol_bal
+plot(seq_along(myLCdata$revol_bal), myLCdata$revol_bal,
+     main = "Scatterplot of Revolving Balance",
+     xlab = "Observation Number",
+     ylab = "Revolving Balance")
+
+# Create a histogram for dti
+hist(myLCdata$dti,
+     main = "Histogram of Debt-to-Income Ratio (dti)",
+     xlab = "Debt-to-Income Ratio (dti)",
+     ylab = "Frequency",
+     col = "skyblue",
+     border = "black")
+
+# Create a boxplot for dti
+boxplot(myLCdata$dti,
+        main = "Boxplot of Debt-to-Income Ratio (dti)",
+        ylab = "Debt-to-Income Ratio (dti)")
+
+# Convert home_ownership to factor 
+myLCdata$home_ownership <- factor(myLCdata$home_ownership, levels = c("RENT", "OWN", "MORTGAGE", "OTHER"))
+
+# Compute the frequency count of each category
+frequency <- table(myLCdata$home_ownership)
+
+# Create a bar plot for home_ownership
+bp <- barplot(frequency,
+              main = "Frequency of Home Ownership",
+              xlab = "Home Ownership",
+              ylab = "Frequency",
+              col = "skyblue",
+              ylim = c(0, max(frequency) * 1.2))  # Adjust the y-axis limit
+
+# Add text labels for numeric values
+text(x = bp,
+     y = frequency + 1,
+     labels = frequency,
+     pos = 3, cex = 0.8, col = "black")
+
+```
+
+# Task 4
+
+## Task Description:
+
+In task 3, you looked at each variable separately. Now the goal is to see if there are some obvious correlations or patterns when looking at pairs of variables.
+
+```{r}
+# Scatterplot for dti against inq_last_6mths
+plot(myLCdata$dti, myLCdata$inq_last_6mths,
+     xlab = "Debt-to-Income Ratio (dti)",
+     ylab = "Inquiries in Last 6 Months",
+     main = "Scatterplot of dti vs. Inquiries in Last 6 Months")
+```
