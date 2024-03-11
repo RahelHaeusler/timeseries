@@ -180,9 +180,62 @@ text(x = bp,
 In task 3, you looked at each variable separately. Now the goal is to see if there are some obvious correlations or patterns when looking at pairs of variables.
 
 ```{r}
-# Scatterplot for dti against inq_last_6mths
-plot(myLCdata$dti, myLCdata$inq_last_6mths,
-     xlab = "Debt-to-Income Ratio (dti)",
-     ylab = "Inquiries in Last 6 Months",
-     main = "Scatterplot of dti vs. Inquiries in Last 6 Months")
+# Create a box plot of revol_bal grouped by home_ownership
+boxplot(revol_bal ~ home_ownership, data = myLCdata,
+        main = "Boxplot of Revolving Balance by Home Ownership",
+        xlab = "Home Ownership",
+        ylab = "Revolving Balance",
+        col = "skyblue")
+
+# Calculate the correlation between revol_bal and dti
+correlation <- cor(myLCdata$revol_bal, myLCdata$dti)
+
+# Create a scatterplot of dti against revol_bal
+plot(myLCdata$dti, myLCdata$revol_bal,
+     main = "Scatterplot of Debt-to-Income Ratio vs. Revolving Balance",
+     sub = paste("Correlation =", round(correlation, 2)),
+     xlab = "Debt-to-Income Ratio",
+     ylab = "Revolving Balance",
+     col = "blue")
+
+# Add correlation coefficient to the plot
+text(x = min(myLCdata$dti), 
+     y = max(myLCdata$revol_bal),
+     labels = paste("Correlation =", round(correlation, 2)),
+     pos = 4, cex = 0.8, col = "black")
+
+
+# Exclude rows with missing values in inq_last_6mths and pub_rec
+complete_cases <- complete.cases(myLCdata$inq_last_6mths, myLCdata$pub_rec)
+inq_last_6mths <- myLCdata$inq_last_6mths[complete_cases]
+pub_rec <- myLCdata$pub_rec[complete_cases]
+
+# Calculate the correlation between inq_last_6mths and pub_rec
+correlation_2 <- cor(inq_last_6mths, pub_rec)
+
+# Create a scatterplot of pub_rec against inq_last_6mths
+plot(inq_last_6mths, pub_rec,
+     main = "Scatterplot of Inquiries in Last 6 Months vs. Public Records",
+     sub = paste("Correlation =", round(correlation_2, 2)),
+     xlab = "Inquiries in Last 6 Months",
+     ylab = "Public Records",
+     col = "blue")
+
+
+# Exclude rows with missing values in dti and inq_last_6mths
+complete_cases <- complete.cases(myLCdata$dti, myLCdata$inq_last_6mths)
+dti <- myLCdata$dti[complete_cases]
+inq_last_6mths <- myLCdata$inq_last_6mths[complete_cases]
+
+# Calculate the correlation between dti and inq_last_6mths
+correlation_3 <- cor(dti, inq_last_6mths)
+
+# Create a scatterplot of dti against inq_last_6mths
+plot(inq_last_6mths, dti,
+     main = "Scatterplot of Debt-to-Income Ratio vs. Inquiries in Last 6 Months",
+     sub = paste("Correlation =", round(correlation_3, 2)),
+     xlab = "Inquiries in Last 6 Months",
+     ylab = "Debt-to-Income Ratio",
+     col = "blue")
+
 ```
