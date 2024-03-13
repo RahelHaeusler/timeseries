@@ -224,6 +224,15 @@ plot(inq_last_6mths, dti,
      ylab = "Debt-to-Income Ratio",
      col = "blue")
 
+# Convert home_ownership to factor if it's not already
+myLCdata$home_ownership <- factor(myLCdata$home_ownership)
+
+# Create a matrix of scatterplots
+pairs(~ inq_last_6mths + pub_rec + revol_bal + dti + home_ownership, data = myLCdata,
+      main = "Scatterplot Matrix")
+
+
+
 ```
 
 **Add Text**
