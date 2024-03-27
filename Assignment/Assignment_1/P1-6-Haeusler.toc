@@ -1,0 +1,23 @@
+\contentsline {subsection}{\nonumberline Preliminaries}{1}{subsection*.3}%
+\contentsline {section}{\nonumberline Task 1}{2}{section*.5}%
+\contentsline {subsection}{\nonumberline Task Description}{2}{subsection*.7}%
+\contentsline {section}{\nonumberline Task 2}{4}{section*.9}%
+\contentsline {subsection}{\nonumberline Task Description}{4}{subsection*.11}%
+\contentsline {subsubsection}{\nonumberline Analysis}{6}{subsubsection*.13}%
+\contentsline {paragraph}{\nonumberline inq\_last\_6mths}{6}{paragraph*.15}%
+\contentsline {paragraph}{\nonumberline pub\_rec}{6}{paragraph*.17}%
+\contentsline {paragraph}{\nonumberline revol\_bal}{6}{paragraph*.19}%
+\contentsline {paragraph}{\nonumberline dti}{6}{paragraph*.21}%
+\contentsline {paragraph}{\nonumberline home\_ownership}{7}{paragraph*.23}%
+\contentsline {subsection}{\nonumberline Further Exploration}{7}{subsection*.25}%
+\contentsline {section}{\nonumberline Task 3}{8}{section*.27}%
+\contentsline {subsection}{\nonumberline Task Description:}{8}{subsection*.29}%
+\contentsline {subsubsection}{\nonumberline Analysis}{14}{subsubsection*.37}%
+\contentsline {paragraph}{\nonumberline inq\_last\_6mths}{14}{paragraph*.39}%
+\contentsline {paragraph}{\nonumberline pub\_rec}{14}{paragraph*.41}%
+\contentsline {paragraph}{\nonumberline revol\_bal}{14}{paragraph*.43}%
+\contentsline {paragraph}{\nonumberline dti}{15}{paragraph*.45}%
+\contentsline {paragraph}{\nonumberline home\_ownership}{15}{paragraph*.47}%
+\contentsline {section}{\nonumberline Task 4}{15}{section*.49}%
+\contentsline {subsection}{\nonumberline Task Description:}{15}{subsection*.51}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

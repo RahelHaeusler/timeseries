@@ -1,21 +1,35 @@
 ---
 title: "P1-6-Haeusler"
 author: "Rahel Häusler"
-date: 10.04.2024 (deadline)
+date: 04.10.2024 (deadline)
 format: html
 toc: true
+toc-depth: 4
+lof: true
+lot: true
 editor: visual
 warning: false
 error: false
+tbl-cap-location: top
+fig-cap-location: bottom
 ---
 
 ## Preliminaries
 
 ```{r}
-install.packages("data.table")
-install.packages("dplyr")
+#install.packages("quarto")
+#install.packages("data.table")
+#install.packages("dplyr")
+
+
 library(data.table)
 library(dplyr)
+library(quarto)
+library(ggplot2)
+library(skimr)
+library(GGally)
+library(knitr)
+
 LCdata <- fread("LCdata.csv")
 set.seed(6)
 myLCdata <- LCdata %>% sample(5) %>% slice_sample(prop = .5)
@@ -24,26 +38,27 @@ myLCdata <- LCdata %>% sample(5) %>% slice_sample(prop = .5)
 
 # Task 1
 
-## Task Description:
+## Task Description
 
-Use dplyr::glimpse() and str() to get a first impression of your data set. Download the data dictionary from Moodle, find the attributes that are present in your data set myLCdata and read the corresponding descriptions. **Try to understand their meaning in the context of peer-to-peer (P2P) loans**.
+Use dplyr::glimpse() and str() to get a first impression of your data set. Download the data dictionary from Moodle, find the attributes that are present in your data set myLCdata and read the corresponding descriptions. Try to understand their meaning in the context of peer-to-peer (P2P) loans.
 
 ```{r}
 # Get a glimpse of the dataset
 glimpse(myLCdata)
 
+```
+
+```{r}
 # Use str() function to get structure of the dataset
 str(myLCdata)
-
-
 ```
 
 +----------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Variable       | Description                                                                                                                                                                                                               | Meaning for P2P Loans                                                                                                                                                                                                                                                                                                                                     |
 +================+===========================================================================================================================================================================================================================+===========================================================================================================================================================================================================================================================================================================================================================+
-| inq_last_6mths | The number of inquiries in past 6 months (excluding auto and mortgage inquiries)                                                                                                                                          | The number of inquiries helps the lender to evaluate the credit worthiness and credit trustness of the borrower (e.g. may indicate overspending –\> risk of credit default)                                                                                                                                                                               |
+| inq_last_6mths | The number of inquiries in past 6 months (excluding auto and mortgage inquiries)                                                                                                                                          | The number of inquiries helps the lender to evaluate the credit worthiness and credit trustiness of the borrower (e.g. may indicate overspending –\> risk of credit default)                                                                                                                                                                              |
 +----------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| pub_rec        | Number of derogatory public records.                                                                                                                                                                                      | The number of derogatory public records helps the lender to assess the credit worthiness of the borrower. Furthermore, public records may be used for risk and compliance assessment of the borrower.                                                                                                                                                     |
+| pub_rec        | Number of derogatory public records                                                                                                                                                                                       | The number of derogatory public records helps the lender to assess the credit worthiness of the borrower. Furthermore, public records may be used for risk and compliance assessment of the borrower.                                                                                                                                                     |
 +----------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | revol_bal      | Total credit revolving balance.\                                                                                                                                                                                          | Revolving balance have to be considered in the creditworthiness assessment. The credit line has to be considered in the debit utilization ratio which influences the risk evaluation of the loan and therefore directly impacts the interest rate. Moreover, the credit revolving balance can help to understand the financial stability of the borrower. |
 |                | A revolving credit is a credit line that remains available even as you pay the balance. Borrowers can access credit up to a certain amount and then have ongoing access to that amount of credit. Typically a credit card |                                                                                                                                                                                                                                                                                                                                                           |
@@ -53,61 +68,161 @@ str(myLCdata)
 | home_ownership | The home ownership status provided by the borrower during registration. Our values are: RENT, OWN, MORTGAGE, OTHER.                                                                                                       | The home ownership status can provide insights into the financial stability and responsibility of the borrower.                                                                                                                                                                                                                                           |
 +----------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-: Extract of LC_DataDictionary
+: Table 1: Extract of LC_DataDictionary
 
 # Task 2
 
-## Task Description:
+## Task Description
 
 Use summary() and skimr::skim() to review the main statistical metrics of your attributes. What do they tell you about the attributes? **Interpret them not only statistically, but also in the domain context**.
 
 ```{r}
-library(skimr)
 # Review main statistical metrics using summary()
 summary(myLCdata)
 
+```
+
+```{r}
+#| label: tbl-skim-summary
+#| tbl-cap: Summary statistics for characters and numeric variables
+#| tbl-subcap: 
+#|   - "Data Summary"
+#|   - "Summary of character variables" 
+#|   - "Summary of numeric variables"
+#| layout-ncol: 1
+#| layout-align: left
 # Review main statistical metrics using skim()
 skim(myLCdata)
+```
+
+### Analysis
+
+#### inq_last_6mths
+
+With the mean being at 0.6965 for the number of inquiries in the last 6 months, it is to assume that the majority requests a loan for the first time in the last 6 months. Considering the median of 0.00 and the maximum value of 27, it is to say that the distribution is right-skewed. Furthermore to highlight is the aspect, that 75% of the loan request in the last 6 months are either their first or second request. For two observations, the number of inquiries in the last 6 months are missing. However, this small number does not hinder the analysis of the data set. The number of inquiries may give an indication on how urgent the requester needs the credit and may indicate financial difficulties of the requester. As for example the observation with 27 counts of inquires in the last 6 months would lead to believe, that the requester is in a more financial turbulence than the one with a first time request.
+
+#### pub_rec
+
+For the number of public records, it is interesting to see that 75% of the observation have no registered public records (3rd quantile is at 0). With the mean being at 0.1973 and the maximum at 86.00, the distribution of the number of public records seems to be right-skewed. The observation with a number of public records of 86 can probably be considered as an outlier. For two observations, the number of inquiries in the last 6 months are missing. However, the small number seems not to be relevant for the further analysis of the data set. People with either a high number of public records or a severe entry in the public records may not receive credits from financial institute due to compliance reasons. For people with no public records, a credit taken out from the lending club could be more interesting in regard to the interest rate.
+
+#### revol_bal
+
+For the attribute revolving balance, as the median is smaller as the mean, it can be said that it is right-skewed as well. The maximum amount of 1'630'818 seems to be a very high amount with the second highest amount being at 952'013. It may seem that those high values are outliers. However, it is essential to further analyse these observation and to determine, if these are erroneous input or not.
+
+#### dti
+
+As the other previous mentioned values, the attribute debt-to-income seems to be right-skewed as well as the median is smaller than the mean and the maximum value is at 64.50. With the 3rd quantile being at 23.95, the majority of the observation have debt-to-income ratio below 25%. As mortgages and the requested LC loan is not considered in this calculation, it is difficult to assess the real "credit risk" of the observation as their financial obligation may be much higher than expected.
+
+#### home_ownership
+
+As the attribute home_ownership is categorical, the calculation of a mean, median etc. is not possible. The attribute home ownership may give an indication about the financial stability and back ups of the requester. An exploration of the distribution will be done in the further steps with an histogram. Additionally, you will find the an insight of the distribution of this attribute in the following section "Further Exploration". 50% of the observation have a mortgage on their own property and almost 40% are currently renting. As owning a property and renting a property are the most common living situation nowadays, the data set seems not to be unbalanced. Furthermore, as neither mortgage payments as well as the rent payments are considered in the debt-to-income ratio, this attribute may get a further insight on the financial obligation of the requester. Additionally, as can be seen in the further exploration, for the attribute home_ownership, two additional variables, "NONE"and "ANY", appear in the data set. These two are not mentioned in the description of the attribute.
+
+## Further Exploration
+
+```{r}
+#| label: fig-distr_hw_prc
+#| fig-cap: Figure showing the count and percentage distribution of the attribute home_ownership
+
+# Get unique values of home_ownership
+unique_values <- unique(myLCdata$home_ownership)
+
+# Initialize an empty data frame to store the results
+result_df <- data.frame(Home_Ownership = character(), Count = integer(), Percentage = numeric(), stringsAsFactors = FALSE)
+
+# Loop through each unique value
+for (value in unique_values) {
+  # Count occurrences of the value
+  count <- sum(myLCdata$home_ownership == value)
+  
+  # Calculate percentage and round to two decimal places
+  percentage <- round((count / nrow(myLCdata)) * 100, 2)
+  
+  # Append to the result data frame
+  result_df <- rbind(result_df, data.frame(Home_Ownership = value, Count = count, Percentage = percentage))
+}
+
+# Print the result data frame
+print(result_df)
+
+
 ```
 
 # Task 3
 
 ## Task Description:
 
-**Choose at least one suitable diagram type (e.g. a histogram, a scatterplot) for each of the 5 attributes in your data set and visualize it using ggplot2**. **Give your plots a professional look (e.g., add a title, make the axes labels readable, add the measurement units if available).**
+Choose at least one suitable diagram type (e.g. a histogram, a scatterplot) for each of the 5 attributes in your data set and visualize it using ggplot2. Give your plots a professional look (e.g., add a title, make the axes labels readable, add the measurement units if available).
 
-**Interpret each of your plots:**
+Interpret each of your plots:
 
 • What information can you read off the diagram type you chose (e.g. in a histogram you can read off range, distribution, etc.)?
 
 • What does it tell you about the attribute in the context of the attribute semantic and domain? Does it confirm your first assumptions about the attribute from task 2?
 
-```{r}
-library(ggplot2)
+### Analysis
 
+```{r}
+#| label: fig-Hist_inq_last_6mth
+#| fig-cap: Histogram showing the distribution of the attribute inq_last_6mth
+
+# Set the xlim range
+xlim_range <- c(0, 8)
+
+# Subset the data to count the number of values outside the xlim range
+values_outside_range <- myLCdata$inq_last_6m[myLCdata$inq_last_6m < xlim_range[1] | myLCdata$inq_last_6m > xlim_range[2]]
+
+# Calculate the number of values outside the xlim range
+num_outside_range <- length(values_outside_range)
+
+# Create the histogram with the specified xlim range
 hist(myLCdata$inq_last_6m,
-     main = "Histogram of Inquiries in Last 6 Months",
+     main = "Histogram of Inquiries in last 6 Months",
      xlab = "Number of Inquiries",
      ylab = "Frequency",
      col = "skyblue",
      border = "black",
-     xlim = c(0, 8))
+     xlim = xlim_range,
+     sub = paste("Number of values outside X range:", num_outside_range))
+
+```
+
+#### inq_last_6mths 
+
+@fig-Hist_inq_last_6mth
+
+For the number of inquiries in the last 6 months, the assumption done in task 2 can be confirmed as the majority of observations lies between 0 up to 2 requests. As the range of the number of inquires has been limited to 8, 7 observations are not visualized in the histogram.
+
+```{r}
+#| label: fig-Hist_pub_rec
+#| fig-cap: Histogram showing the distribution of the attribute pub_rec
+# Calculate the number of missing values in pub_rec
+num_missing <- sum(is.na(myLCdata$pub_rec))
+
+# Calculate the number of values exceeding the limit
+num_exceeding_limit <- sum(myLCdata$pub_rec > 9, na.rm = TRUE)
 
 # Create a frequency distribution with binwidth=1 for pub_rec
 ggplot(myLCdata, aes(x = pub_rec)) +
-  geom_histogram(binwidth = 1, fill = "skyblue", color = "black",
-                 breaks = hist_range) +
+  geom_histogram(binwidth = 1, fill = "skyblue", color = "black", na.rm = TRUE) +
   labs(title = "Frequency Distribution of Public Records",
        x = "Number of Public Records",
        y = "Frequency",
-       subtitle = paste("There are values which are outside the defined range")) +
-  scale_x_continuous(breaks = hist_range)
+       subtitle = paste("Number of missing values:", num_missing,
+                        "\nNumber of values outside X range:", num_exceeding_limit)) +
+  scale_x_continuous(limits = c(-1, 9), breaks = seq(0, 9, by = 1)) +
+ # coord_cartesian(ylim = c(0, 7500))+
+  theme_minimal()
+```
 
-# Create a scatterplot for pub_rec
-plot(seq_along(myLCdata$pub_rec), myLCdata$pub_rec,
-     main = "Scatterplot of Public Records",
-     xlab = "Observation Number",
-     ylab = "Number of Public Records")
+#### pub_rec
+
+For the number of public records, the analysis conducted in task 2 can be confirmed as well the majority of the observation has no public records. For the visualization, the number of pubic records display have been limited to 9. This leads to 6 observation not being visualized.
+
+```{r}
+#| label: fig-Hist_revol_bal
+#| fig-cap: Histogram showing the distribution of the attribute revol_bal
+# Calculate the number of values exceeding the limit
+num_exceeding_limit_revolbal <- sum(myLCdata$revol_bal > 300000)
 
 # Create a histogram for revol_bal
 hist(myLCdata$revol_bal,
@@ -116,13 +231,17 @@ hist(myLCdata$revol_bal,
      ylab = "Frequency",
      col = "skyblue",
      border = "black",
-     xlim = c(0, 300000))
+     xlim = c(0, 300000),
+     sub = paste("Number of values outside X range:", num_exceeding_limit_revolbal))
+```
 
-# Create a scatterplot for revol_bal
-plot(seq_along(myLCdata$revol_bal), myLCdata$revol_bal,
-     main = "Scatterplot of Revolving Balance",
-     xlab = "Observation Number",
-     ylab = "Revolving Balance")
+#### revol_bal
+
+For the visualization of the credit revolving balance, the amount of balances has been limited to USD 300'000, leading to 19 observation not being displayed. The assumption of a right-skewed distribution seems to be correct
+
+```{r}
+#| label: fig-Hist_dti
+#| fig-cap: Histogram showing the distribution of the attribute dti
 
 # Create a histogram for dti
 hist(myLCdata$dti,
@@ -131,14 +250,28 @@ hist(myLCdata$dti,
      ylab = "Frequency",
      col = "skyblue",
      border = "black")
+```
+
+```{r}
+#| label: fig-BP_dti
+#| fig-cap: Boxplot showing the distribution of the attribute dti
 
 # Create a boxplot for dti
 boxplot(myLCdata$dti,
         main = "Boxplot of Debt-to-Income Ratio (dti)",
         ylab = "Debt-to-Income Ratio (dti)")
+```
+
+#### dti
+
+The box plot diagram confirms the calculated median of 18.14 from Task 2. Furthermore, you can well see 4 outlier observations which are depicted as dots.
+
+```{r}
+#| label: fig-Hist_home_ownership
+#| fig-cap: Histogram showing the distribution of the attribute home_ownership
 
 # Convert home_ownership to factor 
-myLCdata$home_ownership <- factor(myLCdata$home_ownership, levels = c("RENT", "OWN", "MORTGAGE", "OTHER"))
+myLCdata$home_ownership <- factor(myLCdata$home_ownership, levels = c("RENT", "OWN", "MORTGAGE", "OTHER", "ANY", "NONE"))
 
 # Compute the frequency count of each category
 frequency <- table(myLCdata$home_ownership)
@@ -156,14 +289,56 @@ text(x = bp,
      y = frequency + 1,
      labels = frequency,
      pos = 3, cex = 0.8, col = "black")
-
 ```
+
+#### home_ownership
+
+The histogram of the variable "home_ownership" confirms the calculated distribution in percentage of Task 2. The two categories "Mortgage" and "Rent" are the most common ones, which does make sense in considering today's society.
 
 # Task 4
 
 ## Task Description:
 
 In task 3, you looked at each variable separately. Now the goal is to see if there are some obvious correlations or patterns when looking at pairs of variables.
+
+```{r}
+#| label: fig-Correlation
+#| fig-cap: Visualization of possible correlation of two attributes
+
+myLCdata_clean <- na.omit(myLCdata[, c("inq_last_6mths", "pub_rec", "revol_bal", "dti", "home_ownership")])
+#ggpairs(myLCdata_clean)
+
+suppressMessages({
+  ggpairs(myLCdata_clean[, c("inq_last_6mths", "pub_rec", "revol_bal", "dti", "home_ownership")])
+})
+```
+
+As I couldn't find a visible correlation in the previously produced Figure, @fig-Correlation, I tried to calculate the correlation of each set of two variables in the following code.
+
+```{r}
+#| label: tbl-corr_matr
+#| tbl-cap: Table of the Correlation
+# Get the names of numeric columns
+numeric_columns <- names(myLCdata)[sapply(myLCdata, is.numeric)]
+
+# Subset myLCdata using the numeric column names
+numeric_data <- myLCdata[, ..numeric_columns]
+
+# Remove missing values
+numeric_data_noNA <- na.omit(numeric_data)
+
+# Convert data frame to matrix-like object
+numeric_matrix <- as.matrix(numeric_data_noNA)
+
+# Calculate correlation matrix
+correlation_matrix <- cor(numeric_matrix)
+
+# Convert correlation matrix to data frame
+correlation_df <- as.data.frame(correlation_matrix)
+
+# Print the correlation matrix as a table
+kable(correlation_df, caption = "Correlation Matrix")
+```
 
 ```{r}
 # Create a box plot of revol_bal grouped by home_ownership
@@ -173,6 +348,9 @@ boxplot(revol_bal ~ home_ownership, data = myLCdata,
         ylab = "Revolving Balance",
         col = "skyblue")
 
+```
+
+```{r}
 # Calculate the correlation between revol_bal and dti
 correlation <- cor(myLCdata$revol_bal, myLCdata$dti)
 
@@ -189,8 +367,9 @@ text(x = min(myLCdata$dti),
      y = max(myLCdata$revol_bal),
      labels = paste("Correlation =", round(correlation, 2)),
      pos = 4, cex = 0.8, col = "black")
+```
 
-
+```{r}
 # Exclude rows with missing values in inq_last_6mths and pub_rec
 complete_cases <- complete.cases(myLCdata$inq_last_6mths, myLCdata$pub_rec)
 inq_last_6mths <- myLCdata$inq_last_6mths[complete_cases]
@@ -206,8 +385,9 @@ plot(inq_last_6mths, pub_rec,
      xlab = "Inquiries in Last 6 Months",
      ylab = "Public Records",
      col = "blue")
+```
 
-
+```{r}
 # Exclude rows with missing values in dti and inq_last_6mths
 complete_cases <- complete.cases(myLCdata$dti, myLCdata$inq_last_6mths)
 dti <- myLCdata$dti[complete_cases]
@@ -223,16 +403,4 @@ plot(inq_last_6mths, dti,
      xlab = "Inquiries in Last 6 Months",
      ylab = "Debt-to-Income Ratio",
      col = "blue")
-
-# Convert home_ownership to factor if it's not already
-myLCdata$home_ownership <- factor(myLCdata$home_ownership)
-
-# Create a matrix of scatterplots
-pairs(~ inq_last_6mths + pub_rec + revol_bal + dti + home_ownership, data = myLCdata,
-      main = "Scatterplot Matrix")
-
-
-
 ```
-
-**Add Text**
