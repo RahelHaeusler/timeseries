@@ -74,7 +74,7 @@ str(myLCdata)
 
 ## Task Description
 
-Use summary() and skimr::skim() to review the main statistical metrics of your attributes. What do they tell you about the attributes? **Interpret them not only statistically, but also in the domain context**.
+Use summary() and skimr::skim() to review the main statistical metrics of your attributes. What do they tell you about the attributes? Interpret them not only statistically, but also in the domain context.
 
 ```{r}
 # Review main statistical metrics using summary()
@@ -176,21 +176,19 @@ num_outside_range <- length(values_outside_range)
 
 # Create the histogram with the specified xlim range
 hist(myLCdata$inq_last_6m,
-     main = "Histogram of Inquiries in last 6 Months",
+     main = "Histogram of Inquiries in Last 6 Months",
      xlab = "Number of Inquiries",
      ylab = "Frequency",
      col = "skyblue",
      border = "black",
      xlim = xlim_range,
-     sub = paste("Number of values outside X range:", num_outside_range))
+     sub = paste("Number of values outside xlim range:", num_outside_range))
 
 ```
 
-#### inq_last_6mths 
+#### inq_last_6mths
 
-@fig-Hist_inq_last_6mth
-
-For the number of inquiries in the last 6 months, the assumption done in task 2 can be confirmed as the majority of observations lies between 0 up to 2 requests. As the range of the number of inquires has been limited to 8, 7 observations are not visualized in the histogram.
+For the number of inquiries in the last 6 months, the assumption done in task 2 can be confirmed as the majority of observations lies between 0 up to 2 inquiries. Only a small number of observation have more than 2 inquiries in the last 6 months. As the range of the number of inquires has been limited to 8, 7 observations are not visualized in the histogram. @fig-Hist_inq_last_6mth may indicate that either the first or second inquiry is successful and therefore, not an additional one is done. Or, that the majority of people who are interested in a loan form LC consider other financing possibilities after 2 denied requests.
 
 ```{r}
 #| label: fig-Hist_pub_rec
@@ -216,7 +214,7 @@ ggplot(myLCdata, aes(x = pub_rec)) +
 
 #### pub_rec
 
-For the number of public records, the analysis conducted in task 2 can be confirmed as well the majority of the observation has no public records. For the visualization, the number of pubic records display have been limited to 9. This leads to 6 observation not being visualized.
+For the number of public records, the analysis conducted in task 2 can be confirmed as well the majority of the observation has no public records. Furthermore, a much smaller number of observations have 1 public record and a even smaller number have more than 2 public records. For the visualization, the number of pubic records display have been limited to 9. This leads to 6 observation not being visualized. @fig-Hist_pub_rec supports the assumptions that especially law-abiding people are requesting loans at the Lenders Club. This may be influenced by the fact, that borrowers with no or a small number of public records, probably depending as well on which entry, receive an interesting interest rate. Furthermore, lenders may be more willing to lend their money to someone with a low number of public records.
 
 ```{r}
 #| label: fig-Hist_revol_bal
@@ -237,7 +235,7 @@ hist(myLCdata$revol_bal,
 
 #### revol_bal
 
-For the visualization of the credit revolving balance, the amount of balances has been limited to USD 300'000, leading to 19 observation not being displayed. The assumption of a right-skewed distribution seems to be correct
+For the visualization of the credit revolving balance, the amount of balances has been limited to USD 300'000, leading to 19 observation not being displayed. The assumption of a right-skewed distribution seems to be correct. Additionally, it is visible that the majority of observation have a revolving balance between USD 0 and USD 100'000. You may interpret the result that observation with an revolving balance over USD 100'000 are not ordinary.
 
 ```{r}
 #| label: fig-Hist_dti
@@ -264,7 +262,7 @@ boxplot(myLCdata$dti,
 
 #### dti
 
-The box plot diagram confirms the calculated median of 18.14 from Task 2. Furthermore, you can well see 4 outlier observations which are depicted as dots.
+The box plot diagram confirms the calculated median of 18.14 from Task 2. Furthermore, you can well see 4 outlier observations which are depicted as dots in @fig-BP_dti. Additionally, in @fig-Hist_dti, the main observations have a debt-to-income ratio between 0 to 40 . Between those two numbers, the distribution looks similar to an univariate distribution.
 
 ```{r}
 #| label: fig-Hist_home_ownership
@@ -293,7 +291,7 @@ text(x = bp,
 
 #### home_ownership
 
-The histogram of the variable "home_ownership" confirms the calculated distribution in percentage of Task 2. The two categories "Mortgage" and "Rent" are the most common ones, which does make sense in considering today's society.
+The histogram of the variable "home_ownership" confirms the calculated distribution in percentage of Task 2. The two categories "Mortgage" and "Rent" are the most common ones, which are as well the most common living situation in considering today's society.
 
 # Task 4
 
@@ -313,7 +311,7 @@ suppressMessages({
 })
 ```
 
-As I couldn't find a visible correlation in the previously produced Figure, @fig-Correlation, I tried to calculate the correlation of each set of two variables in the following code.
+As I couldn't find a visible correlation in the previously produced @fig-Correlation, I tried to calculate the correlation of each set of two variables in the following code.
 
 ```{r}
 #| label: tbl-corr_matr
@@ -340,17 +338,58 @@ correlation_df <- as.data.frame(correlation_matrix)
 kable(correlation_df, caption = "Correlation Matrix")
 ```
 
+After further clarification with Gwen, I decided to further investigate the relationship of the two variables revol_bal and home_ownership, as can be seen in @fig-BP_T4_11. Before running the code, I expected to see a difference between home owners, either with or without mortgage, and people who are currently renting. I expected this result as I thought that home owners either have invested their assets in their homes and / or have more financial obligations due to mortgage payments, both leading to a more stressed financial situation.
+
 ```{r}
+#| label: fig-BP_T4_11
+#| fig-cap: Boxplotof the two attribute revol_bal and home_ownership
+
 # Create a box plot of revol_bal grouped by home_ownership
 boxplot(revol_bal ~ home_ownership, data = myLCdata,
         main = "Boxplot of Revolving Balance by Home Ownership",
         xlab = "Home Ownership",
         ylab = "Revolving Balance",
         col = "skyblue")
+```
 
+Considering @fig-BP_T4_11, a small difference between people owning a property, either with or without mortgage, and people who are renting can be seen. Furthermore, the observations with the home ownership status "Mortgage" tend to have a higher Revolving Balance. This may be due to more financial obligations due to the mortgage payment. Therefore, people may request a higher revolving balance (resp. a higher credit card limit) so they are able to pay their daily bills.
+
+In the next step, I wanted to analyse if there is a visible difference between the home ownership status and the number of public records. My first assumption is that people who live in their own property have a smaller number of public record entries as they may have more stability in their life.
+
+```{r}
+#| label: fig-BP_T4_13
+#| fig-cap: Boxplot of the two attribute pub_rec and home_ownership
+
+# Create a box plot of revol_bal grouped by home_ownership
+boxplot(pub_rec ~ home_ownership, data = myLCdata,
+        main = "Boxplot of Public Records by Home Ownership",
+        xlab = "Home Ownership",
+        ylab = "Public Records",
+        col = "skyblue")
 ```
 
 ```{r}
+#| label: fig-BP_T4_14
+#| fig-cap: Zoomed in Boxplotof the two attribute pub_rec and home_ownership
+
+# Create a box plot of pub_rec grouped by home_ownership
+boxplot(pub_rec ~ home_ownership, data = myLCdata,
+        main = "Zoomed in Boxplot of Public Records by Home Ownership",
+        xlab = "Home Ownership",
+        ylab = "Public Records",
+        col = "skyblue",
+        ylim = c(0, 40))
+
+```
+
+However, as shown in @fig-BP_T4_13 and @fig-BP_T4_14, no significant difference can be detected. Only the number of the outliers may differ. However, as outliers are observation which vary greatly from the other observations, these points will not be considered for comparison.
+
+Additionally, I wanted to further explore the relationship between the two attributes debt-to-income and revolving balance. As described in task 1, dti considers the total monthly debt payments on the total debt obligations in its calculation. However, as described in the LC Data Dictionary, the revolving balance is typically the credit card. As the payment system in the US varies from the one in Switzerland, it is difficult to understand how the "open" revolving balance would be considered in the debt-to-income ratio. In my understanding, people with a high income are more likely to get a high revolving balance granted. Nonetheless, the debt-to-income ratio should be in the same range.
+
+```{r}
+#| label: fig-SP_T4_12
+#| fig-cap: Scatterplot of the two attributes dti and revol_bal
+
 # Calculate the correlation between revol_bal and dti
 correlation <- cor(myLCdata$revol_bal, myLCdata$dti)
 
@@ -362,14 +401,77 @@ plot(myLCdata$dti, myLCdata$revol_bal,
      ylab = "Revolving Balance",
      col = "blue")
 
-# Add correlation coefficient to the plot
-text(x = min(myLCdata$dti), 
-     y = max(myLCdata$revol_bal),
-     labels = paste("Correlation =", round(correlation, 2)),
-     pos = 4, cex = 0.8, col = "black")
 ```
 
 ```{r}
+#| label: fig-SP_T4_121
+#| fig-cap: Zoomed in Scatterplot of the two attributes dti and revol_bal
+
+# Calculate the correlation between revol_bal and dti
+correlation <- cor(myLCdata$revol_bal, myLCdata$dti)
+
+# Create a scatterplot of dti against revol_bal
+plot(myLCdata$dti, myLCdata$revol_bal,
+     main = "Scatterplot of Debt-to-Income Ratio vs. Revolving Balance",
+     sub = paste("Correlation =", round(correlation, 2)),
+     xlab = "Debt-to-Income Ratio",
+     ylab = "Revolving Balance",
+     col = "blue",
+     ylim = c(0, 200000))
+
+```
+
+As can be seen in @fig-SP_T4_12 as well in @fig-SP_T4_121, it looks like the amount of the revolving balance seems is limited to a 40% Debt-to-Income Ratio. Only four observations have been done outside the mentioned 40% limit. As I do not have the data on the income, the analysis of the relationship between the income and the height of the revolving balance cannot be done. However, it can be said that in all cases, besides the outliers, the revolving balance seems to be limited to 40% debt-to-income ratio.
+
+In a further step, I wanted to investigate, if any further insights could be gained by adding the attribute home_ownership in the visualization of the attributes revol_bal and dti. As already known from @fig-BP_T4_11, home owners with a mortgage tend to have a higher revolving balance. Considering that factor, I would expect that the debt-to-income ratio for home owners with a mortgage would be higher than the one for the observations with the home owner status "Rent".
+
+```{r}
+#| label: fig-SP_T4_21
+#| fig-cap: Scatterplot showing the distribution of the attribute revol_bal, dti and home_ownership
+
+# Calculate the correlation between revol_bal and dti
+correlation <- cor(myLCdata$revol_bal, myLCdata$dti)
+
+# Create a scatterplot of dti against revol_bal with home_ownership as color
+ggplot(myLCdata, aes(x = dti, y = revol_bal, color = home_ownership)) +
+  geom_point() +
+  labs(title = "Scatterplot of Debt-to-Income Ratio vs. Revolving Balance",
+       subtitle = paste("Correlation =", round(correlation, 2)),
+       x = "Debt-to-Income Ratio",
+       y = "Revolving Balance",
+       caption = paste("Correlation =", round(correlation, 2))) +
+  theme(plot.caption = element_text(hjust = 0.5))
+```
+
+In @fig-SP_T4_21, observations with the home owner status "Mortgage" have in general a higher revolving balance than observation with the home owner status "Rent". This disparity could be due to the increased financial obligations associated with mortgage payments. Depending on the time frame in which the data was collected, this may indicate a trend for home owners with mortgages to maintain a higher revolving balance to cover their daily expenses. However, no further insights can be gained by considering the attribute debt-to income-ratio. Additionally, observations with the home owner status "Own" seems to be more distributed and therefore, it is more difficult to recognize a trend.
+
+## Further Exploration
+
+```{r}
+#| label: fig-SP_dti_inq_last_6mths
+#| fig-cap: Scatterplot of the two attributes dti and inq_last_6mths
+
+# Exclude rows with missing values in dti and inq_last_6mths
+complete_cases <- complete.cases(myLCdata$dti, myLCdata$inq_last_6mths)
+dti <- myLCdata$dti[complete_cases]
+inq_last_6mths <- myLCdata$inq_last_6mths[complete_cases]
+
+# Calculate the correlation between dti and inq_last_6mths
+correlation_3 <- cor(dti, inq_last_6mths)
+
+# Create a scatterplot of dti against inq_last_6mths
+plot(inq_last_6mths, dti,
+     main = "Scatterplot of Debt-to-Income Ratio vs. Inquiries in Last 6 Months",
+     sub = paste("Correlation =", round(correlation_3, 2)),
+     xlab = "Inquiries in Last 6 Months",
+     ylab = "Debt-to-Income Ratio",
+     col = "blue")
+```
+
+```{r}
+#| label: fig-SP_inq_last_6mths_pub_rec
+#| fig-cap: Histogram showing the distribution of the attribute revol_bal
+
 # Exclude rows with missing values in inq_last_6mths and pub_rec
 complete_cases <- complete.cases(myLCdata$inq_last_6mths, myLCdata$pub_rec)
 inq_last_6mths <- myLCdata$inq_last_6mths[complete_cases]
@@ -388,19 +490,13 @@ plot(inq_last_6mths, pub_rec,
 ```
 
 ```{r}
-# Exclude rows with missing values in dti and inq_last_6mths
-complete_cases <- complete.cases(myLCdata$dti, myLCdata$inq_last_6mths)
-dti <- myLCdata$dti[complete_cases]
-inq_last_6mths <- myLCdata$inq_last_6mths[complete_cases]
+#| label: fig-SP_T4_22
+#| fig-cap: Scatterplot showing the distribution of the attribute inq_last_6mths, pub_rec and home_ownership
 
-# Calculate the correlation between dti and inq_last_6mths
-correlation_3 <- cor(dti, inq_last_6mths)
-
-# Create a scatterplot of dti against inq_last_6mths
-plot(inq_last_6mths, dti,
-     main = "Scatterplot of Debt-to-Income Ratio vs. Inquiries in Last 6 Months",
-     sub = paste("Correlation =", round(correlation_3, 2)),
-     xlab = "Inquiries in Last 6 Months",
-     ylab = "Debt-to-Income Ratio",
-     col = "blue")
+# Create a scatterplot of inq_last_6mths against pub_rec with home_ownership as color
+ggplot(myLCdata, aes(x = inq_last_6mths, y = pub_rec, color = home_ownership)) +
+  geom_point() +
+  labs(title = "Scatterplot of Inquiries in the last 6 months vs. Public Recrods incl. status of home ownership ",
+       x = "Inquiries in the last 6 months",
+       y = "Public Records")
 ```

@@ -118,6 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#task-4" id="toc-task-4" class="nav-link" data-scroll-target="#task-4">Task 4</a>
   <ul>
   <li><a href="#task-description-3" id="toc-task-description-3" class="nav-link" data-scroll-target="#task-description-3">Task Description:</a></li>
+  <li><a href="#further-exploration-1" id="toc-further-exploration-1" class="nav-link" data-scroll-target="#further-exploration-1">Further Exploration</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -179,15 +180,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="task-description" class="level2">
 <h2 class="anchored" data-anchor-id="task-description">Task Description</h2>
 <p>Use dplyr::glimpse() and str() to get a first impression of your data set. Download the data dictionary from Moodle, find the attributes that are present in your data set myLCdata and read the corresponding descriptions. Try to understand their meaning in the context of peer-to-peer (P2P) loans.</p>
-<div>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get a glimpse of the dataset</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(myLCdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="tbl-glimpse" class="cell tbl-parent quarto-layout-panel anchored" data-tbl-cap="Table showing the output of the function glimpse">
-<div class="panel-caption table-caption">
-<p><strong>?(caption)</strong></p>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout">
 <pre><code>Rows: 44,369
 Columns: 5
 $ inq_last_6mths &lt;int&gt; 0, 1, 0, 2, 0, 4, 1, 0, 0, 0, 0, 0, 1, 0, 2, 1, 0, 0, 1…
@@ -197,25 +193,16 @@ $ dti            &lt;dbl&gt; 10.43, 15.73, 12.37, 19.64, 14.06, 39.16, 13.79, 9.
 $ home_ownership &lt;chr&gt; "RENT", "RENT", "RENT", "MORTGAGE", "MORTGAGE", "RENT",…</code></pre>
 </div>
 </div>
-</div>
-</div>
-<div>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use str() function to get structure of the dataset</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(myLCdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="tbl-str" class="cell tbl-parent quarto-layout-panel anchored" data-tbl-cap="Table showing the output of the function str">
-<div class="panel-caption table-caption">
-<p><strong>?(caption)</strong></p>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout">
 <pre><code>Classes 'data.table' and 'data.frame':  44369 obs. of  5 variables:
  $ inq_last_6mths: int  0 1 0 2 0 4 1 0 0 0 ...
  $ pub_rec       : int  0 0 0 0 2 0 0 0 1 0 ...
  $ revol_bal     : int  474 41023 16683 15080 17747 84447 6489 46750 2695 14157 ...
  $ dti           : num  10.4 15.7 12.4 19.6 14.1 ...
  $ home_ownership: chr  "RENT" "RENT" "RENT" "MORTGAGE" ...</code></pre>
-</div>
-</div>
 </div>
 </div>
 <table class="table">
@@ -267,16 +254,11 @@ A revolving credit is a credit line that remains available even as you pay the b
 <h1>Task 2</h1>
 <section id="task-description-1" class="level2">
 <h2 class="anchored" data-anchor-id="task-description-1">Task Description</h2>
-<p>Use summary() and skimr::skim() to review the main statistical metrics of your attributes. What do they tell you about the attributes? <strong>Interpret them not only statistically, but also in the domain context</strong>.</p>
-<div>
+<p>Use summary() and skimr::skim() to review the main statistical metrics of your attributes. What do they tell you about the attributes? Interpret them not only statistically, but also in the domain context.</p>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Review main statistical metrics using summary()</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(myLCdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="tbl-summary" class="cell tbl-parent quarto-layout-panel anchored" data-tbl-cap="Table showing the output of the function summary">
-<div class="panel-caption table-caption">
-<p><strong>?(caption)</strong></p>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout">
 <pre><code> inq_last_6mths       pub_rec          revol_bal            dti       
  Min.   : 0.0000   Min.   : 0.0000   Min.   :      0   Min.   : 0.00  
  1st Qu.: 0.0000   1st Qu.: 0.0000   1st Qu.:   6472   1st Qu.:11.91  
@@ -295,19 +277,17 @@ A revolving credit is a credit line that remains available even as you pay the b
                    </code></pre>
 </div>
 </div>
-</div>
-</div>
 <div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Review main statistical metrics using skim()</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(myLCdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="tbl-skim" class="cell tbl-parent quarto-layout-panel anchored">
+<div id="tbl-skim-summary" class="cell tbl-parent quarto-layout-panel anchored">
 <div class="panel-caption table-caption">
-<p>Table&nbsp;1: Table showing the output of the function skim</p>
+<p>Table&nbsp;1: Summary statistics for characters and numeric variables</p>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
-<div id="tbl-skim-1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-skim" style="flex-basis: 100.0%;justify-content: center;">
+<div id="tbl-skim-summary-1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-skim-summary" style="flex-basis: 100.0%;justify-content: flex-start;">
 <table class="table table-sm table-striped small">
-<caption>(a) Data summary</caption>
+<caption>(a) Data Summary</caption>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Name</td>
@@ -354,13 +334,14 @@ A revolving credit is a credit line that remains available even as you pay the b
 </div>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <p><strong>Variable type: character</strong></p>
 </div>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div id="tbl-skim-summary-2" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-skim-summary" style="flex-basis: 100.0%;justify-content: flex-start;">
 <table class="table table-sm table-striped small">
+<caption>(b) Summary of character variables</caption>
 <colgroup>
 <col style="width: 20%">
 <col style="width: 13%">
@@ -399,13 +380,14 @@ A revolving credit is a credit line that remains available even as you pay the b
 </div>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <p><strong>Variable type: numeric</strong></p>
 </div>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div id="tbl-skim-summary-3" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-skim-summary" style="flex-basis: 100.0%;justify-content: flex-start;">
 <table class="table table-sm table-striped small">
+<caption>(c) Summary of numeric variables</caption>
 <colgroup>
 <col style="width: 14%">
 <col style="width: 9%">
@@ -574,13 +556,13 @@ A revolving credit is a credit line that remains available even as you pay the b
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the histogram with the specified xlim range</span></span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(myLCdata<span class="sc">$</span>inq_last_6m,</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Histogram of Inquiries in last 6 Months"</span>,</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Histogram of Inquiries in Last 6 Months"</span>,</span>
 <span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Number of Inquiries"</span>,</span>
 <span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Frequency"</span>,</span>
 <span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"skyblue"</span>,</span>
 <span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">"black"</span>,</span>
 <span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> xlim_range,</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>     <span class="at">sub =</span> <span class="fu">paste</span>(<span class="st">"Number of values outside X range:"</span>, num_outside_range))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>     <span class="at">sub =</span> <span class="fu">paste</span>(<span class="st">"Number of values outside xlim range:"</span>, num_outside_range))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-Hist_inq_last_6mth" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -592,8 +574,7 @@ A revolving credit is a credit line that remains available even as you pay the b
 </div>
 <section id="inq_last_6mths-1" class="level4">
 <h4 class="anchored" data-anchor-id="inq_last_6mths-1">inq_last_6mths</h4>
-<p><a href="#fig-Hist_inq_last_6mth">Figure&nbsp;1</a></p>
-<p>For the number of inquiries in the last 6 months, the assumption done in task 2 can be confirmed as the majority of observations lies between 0 up to 2 requests. As the range of the number of inquires has been limited to 8, 7 observations are not visualized in the histogram.</p>
+<p>For the number of inquiries in the last 6 months, the assumption done in task 2 can be confirmed as the majority of observations lies between 0 up to 2 inquiries. Only a small number of observation have more than 2 inquiries in the last 6 months. As the range of the number of inquires has been limited to 8, 7 observations are not visualized in the histogram. <a href="#fig-Hist_inq_last_6mth">Figure&nbsp;1</a> may indicate that either the first or second inquiry is successful and therefore, not an additional one is done. Or, that the majority of people who are interested in a loan form LC consider other financing possibilities after 2 denied requests.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the number of missing values in pub_rec</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>num_missing <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(myLCdata<span class="sc">$</span>pub_rec))</span>
@@ -624,7 +605,7 @@ A revolving credit is a credit line that remains available even as you pay the b
 </section>
 <section id="pub_rec-1" class="level4">
 <h4 class="anchored" data-anchor-id="pub_rec-1">pub_rec</h4>
-<p>For the number of public records, the analysis conducted in task 2 can be confirmed as well the majority of the observation has no public records. For the visualization, the number of pubic records display have been limited to 9. This leads to 6 observation not being visualized.</p>
+<p>For the number of public records, the analysis conducted in task 2 can be confirmed as well the majority of the observation has no public records. Furthermore, a much smaller number of observations have 1 public record and a even smaller number have more than 2 public records. For the visualization, the number of pubic records display have been limited to 9. This leads to 6 observation not being visualized. <a href="#fig-Hist_pub_rec">Figure&nbsp;2</a> supports the assumptions that especially law-abiding people are requesting loans at the Lenders Club. This may be influenced by the fact, that borrowers with no or a small number of public records, probably depending as well on which entry, receive an interesting interest rate. Furthermore, lenders may be more willing to lend their money to someone with a low number of public records.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the number of values exceeding the limit</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>num_exceeding_limit_revolbal <span class="ot">&lt;-</span> <span class="fu">sum</span>(myLCdata<span class="sc">$</span>revol_bal <span class="sc">&gt;</span> <span class="dv">300000</span>)</span>
@@ -650,7 +631,7 @@ A revolving credit is a credit line that remains available even as you pay the b
 </section>
 <section id="revol_bal-1" class="level4">
 <h4 class="anchored" data-anchor-id="revol_bal-1">revol_bal</h4>
-<p>For the visualization of the credit revolving balance, the amount of balances has been limited to USD 300’000, leading to 19 observation not being displayed. The assumption of a right-skewed distribution seems to be correct</p>
+<p>For the visualization of the credit revolving balance, the amount of balances has been limited to USD 300’000, leading to 19 observation not being displayed. The assumption of a right-skewed distribution seems to be correct. Additionally, it is visible that the majority of observation have a revolving balance between USD 0 and USD 100’000. You may interpret the result that observation with an revolving balance over USD 100’000 are not ordinary.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a histogram for dti</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(myLCdata<span class="sc">$</span>dti,</span>
@@ -685,7 +666,7 @@ A revolving credit is a credit line that remains available even as you pay the b
 </section>
 <section id="dti-1" class="level4">
 <h4 class="anchored" data-anchor-id="dti-1">dti</h4>
-<p>The box plot diagram confirms the calculated median of 18.14 from Task 2. Furthermore, you can well see 4 outlier observations which are depicted as dots.</p>
+<p>The box plot diagram confirms the calculated median of 18.14 from Task 2. Furthermore, you can well see 4 outlier observations which are depicted as dots in <a href="#fig-BP_dti">Figure&nbsp;5</a>. Additionally, in <a href="#fig-Hist_dti">Figure&nbsp;4</a>, the main observations have a debt-to-income ratio between 0 to 40 . Between those two numbers, the distribution looks similar to an univariate distribution.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert home_ownership to factor </span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>myLCdata<span class="sc">$</span>home_ownership <span class="ot">&lt;-</span> <span class="fu">factor</span>(myLCdata<span class="sc">$</span>home_ownership, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"RENT"</span>, <span class="st">"OWN"</span>, <span class="st">"MORTGAGE"</span>, <span class="st">"OTHER"</span>, <span class="st">"ANY"</span>, <span class="st">"NONE"</span>))</span>
@@ -718,7 +699,7 @@ A revolving credit is a credit line that remains available even as you pay the b
 </section>
 <section id="home_ownership-1" class="level4">
 <h4 class="anchored" data-anchor-id="home_ownership-1">home_ownership</h4>
-<p>The histogram of the variable “home_ownership” confirms the calculated distribution in percentage of Task 2. The two categories “Mortgage” and “Rent” are the most common ones, which does make sense in considering today’s society.</p>
+<p>The histogram of the variable “home_ownership” confirms the calculated distribution in percentage of Task 2. The two categories “Mortgage” and “Rent” are the most common ones, which are as well the most common living situation in considering today’s society.</p>
 </section>
 </section>
 </section>
@@ -761,23 +742,15 @@ A revolving credit is a credit line that remains available even as you pay the b
 <span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate correlation matrix</span></span>
 <span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>correlation_matrix <span class="ot">&lt;-</span> <span class="fu">cor</span>(numeric_matrix)</span>
 <span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Print correlation matrix</span></span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(correlation_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>               inq_last_6mths     pub_rec   revol_bal         dti
-inq_last_6mths     1.00000000  0.04949194 -0.00810949 -0.01341430
-pub_rec            0.04949194  1.00000000 -0.08764919 -0.03515577
-revol_bal         -0.00810949 -0.08764919  1.00000000  0.14112852
-dti               -0.01341430 -0.03515577  0.14112852  1.00000000</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert correlation matrix to data frame</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>correlation_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(correlation_matrix)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the correlation matrix as a table</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(correlation_df, <span class="at">caption =</span> <span class="st">"Correlation Matrix"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert correlation matrix to data frame</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>correlation_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(correlation_matrix)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the correlation matrix as a table</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(correlation_df, <span class="at">caption =</span> <span class="st">"Correlation Matrix"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
+<div id="tbl-corr_matr" class="anchored">
 <table class="table table-sm table-striped small">
-<caption>Correlation Matrix</caption>
+<caption>Table&nbsp;2: Table of the Correlation</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;"></th>
@@ -820,16 +793,62 @@ dti               -0.01341430 -0.03515577  0.14112852  1.00000000</code></pre>
 </table>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a box plot of revol_bal grouped by home_ownership</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(revol_bal <span class="sc">~</span> home_ownership, <span class="at">data =</span> myLCdata,</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Boxplot of Revolving Balance by Home Ownership"</span>,</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Home Ownership"</span>,</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Revolving Balance"</span>,</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">"skyblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="P1-6-Haeusler_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
+<p>After further clarification with Gwen, I decided to further investigate the relationship of the two variables revol_bal and home_ownership, as can be seen in <a href="#fig-BP_T4_11">Figure&nbsp;8</a>. Before running the code, I expected to see a difference between home owners, either with or without mortgage, and people who are currently renting. I expected this result as I thought that home owners either have invested their assets in their homes and / or have more financial obligations due to mortgage payments, both leading to a more stressed financial situation.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a box plot of revol_bal grouped by home_ownership</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(revol_bal <span class="sc">~</span> home_ownership, <span class="at">data =</span> myLCdata,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Boxplot of Revolving Balance by Home Ownership"</span>,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Home Ownership"</span>,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Revolving Balance"</span>,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">"skyblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-BP_T4_11" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="P1-6-Haeusler_files/figure-html/fig-BP_T4_11-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;8: Boxplotof the two attribute revol_bal and home_ownership</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Considering <a href="#fig-BP_T4_11">Figure&nbsp;8</a>, a small difference between people owning a property, either with or without mortgage, and people who are renting can be seen. Furthermore, the observations with the home ownership status “Mortgage” tend to have a higher Revolving Balance. This may be due to more financial obligations due to the mortgage payment. Therefore, people may request a higher revolving balance (resp. a higher credit card limit) so they are able to pay their daily bills.</p>
+<p>In the next step, I wanted to analysis if there is a visible difference between the home ownership status and the number of public records. My first assumption is that people who live in their own property have a smaller number of public record entries as they may have more stability in their life.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a box plot of revol_bal grouped by home_ownership</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(pub_rec <span class="sc">~</span> home_ownership, <span class="at">data =</span> myLCdata,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Boxplot of Public Records by Home Ownership"</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Home Ownership"</span>,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Public Records"</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">"skyblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-BP_T4_13" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="P1-6-Haeusler_files/figure-html/fig-BP_T4_13-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;9: Boxplotof the two attribute pub_rec and home_ownership</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a box plot of pub_rec grouped by home_ownership</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(pub_rec <span class="sc">~</span> home_ownership, <span class="at">data =</span> myLCdata,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Boxplot of Public Records by Home Ownership"</span>,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Home Ownership"</span>,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Public Records"</span>,</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">"skyblue"</span>,</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">40</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-BP_T4_14" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="P1-6-Haeusler_files/figure-html/fig-BP_T4_14-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;10: Zoomed in Boxplotof the two attribute pub_rec and home_ownership</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>However, as shown in <a href="#fig-BP_T4_13">Figure&nbsp;9</a> and <a href="#fig-BP_T4_14">Figure&nbsp;10</a>, no significant difference can be detected. Only the number of the outliers may differ. However, as outliers are observation which vary greatly from the other observations, these points will not be considered for comparison.</p>
+<p>Additionally, I wanted to further explore the relationship between the two attributes debt-to-income and revolving balance. As described in task 1, dti considers the total monthly debt payments on the total debt obligations in its calculation. However, as described in the LC Data Dictionary, the revolving balance is typically the credit card. As the payment system in the US varies from the one in Switzerland, it is difficult to understand how the “open” revolving balance would be considered in the debt-to-income ratio. In my understanding, people with a high income are more likely to get a high revolving balance granted. Nonetheless, the debt-to-income ratio should be remain in the same range.</p>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation between revol_bal and dti</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>correlation <span class="ot">&lt;-</span> <span class="fu">cor</span>(myLCdata<span class="sc">$</span>revol_bal, myLCdata<span class="sc">$</span>dti)</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -847,72 +866,157 @@ dti               -0.01341430 -0.03515577  0.14112852  1.00000000</code></pre>
 <span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">labels =</span> <span class="fu">paste</span>(<span class="st">"Correlation ="</span>, <span class="fu">round</span>(correlation, <span class="dv">2</span>)),</span>
 <span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">4</span>, <span class="at">cex =</span> <span class="fl">0.8</span>, <span class="at">col =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="P1-6-Haeusler_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exclude rows with missing values in inq_last_6mths and pub_rec</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>complete_cases <span class="ot">&lt;-</span> <span class="fu">complete.cases</span>(myLCdata<span class="sc">$</span>inq_last_6mths, myLCdata<span class="sc">$</span>pub_rec)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>inq_last_6mths <span class="ot">&lt;-</span> myLCdata<span class="sc">$</span>inq_last_6mths[complete_cases]</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>pub_rec <span class="ot">&lt;-</span> myLCdata<span class="sc">$</span>pub_rec[complete_cases]</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation between inq_last_6mths and pub_rec</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>correlation_2 <span class="ot">&lt;-</span> <span class="fu">cor</span>(inq_last_6mths, pub_rec)</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a scatterplot of pub_rec against inq_last_6mths</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(inq_last_6mths, pub_rec,</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Scatterplot of Inquiries in Last 6 Months vs. Public Records"</span>,</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">sub =</span> <span class="fu">paste</span>(<span class="st">"Correlation ="</span>, <span class="fu">round</span>(correlation_2, <span class="dv">2</span>)),</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Inquiries in Last 6 Months"</span>,</span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Public Records"</span>,</span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="P1-6-Haeusler_files/figure-html/unnamed-chunk-15-3.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exclude rows with missing values in dti and inq_last_6mths</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>complete_cases <span class="ot">&lt;-</span> <span class="fu">complete.cases</span>(myLCdata<span class="sc">$</span>dti, myLCdata<span class="sc">$</span>inq_last_6mths)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>dti <span class="ot">&lt;-</span> myLCdata<span class="sc">$</span>dti[complete_cases]</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>inq_last_6mths <span class="ot">&lt;-</span> myLCdata<span class="sc">$</span>inq_last_6mths[complete_cases]</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation between dti and inq_last_6mths</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>correlation_3 <span class="ot">&lt;-</span> <span class="fu">cor</span>(dti, inq_last_6mths)</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a scatterplot of dti against inq_last_6mths</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(inq_last_6mths, dti,</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Scatterplot of Debt-to-Income Ratio vs. Inquiries in Last 6 Months"</span>,</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">sub =</span> <span class="fu">paste</span>(<span class="st">"Correlation ="</span>, <span class="fu">round</span>(correlation_3, <span class="dv">2</span>)),</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Inquiries in Last 6 Months"</span>,</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Debt-to-Income Ratio"</span>,</span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="P1-6-Haeusler_files/figure-html/unnamed-chunk-15-4.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert home_ownership to factor if it's not already</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>myLCdata<span class="sc">$</span>home_ownership <span class="ot">&lt;-</span> <span class="fu">factor</span>(myLCdata<span class="sc">$</span>home_ownership)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a matrix of scatterplots</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(<span class="sc">~</span> inq_last_6mths <span class="sc">+</span> pub_rec <span class="sc">+</span> revol_bal <span class="sc">+</span> dti <span class="sc">+</span> home_ownership, <span class="at">data =</span> myLCdata,</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">"Scatterplot Matrix"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="P1-6-Haeusler_files/figure-html/unnamed-chunk-15-5.png" class="img-fluid" width="672"></p>
+<div id="fig-SP_T4_12" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="P1-6-Haeusler_files/figure-html/fig-SP_T4_12-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;11: Scatterplot of the two attributes dti and revol_bal</figcaption>
+</figure>
 </div>
 </div>
-<p><strong>Add Text</strong></p>
+</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove missing values from revol_bal and inq_last_6mths variables</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>cleaned_data <span class="ot">&lt;-</span> myLCdata <span class="sc">%&gt;%</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(revol_bal), <span class="sc">!</span><span class="fu">is.na</span>(inq_last_6mths)) <span class="sc">%&gt;%</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    revol_bal <span class="sc">&lt;</span> <span class="fu">quantile</span>(revol_bal, <span class="fl">0.99</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">&amp;</span> </span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    inq_last_6mths <span class="sc">&lt;</span> <span class="fu">quantile</span>(inq_last_6mths, <span class="fl">0.99</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create scatterplot</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cleaned_data, <span class="fu">aes</span>(<span class="at">x =</span> revol_bal, <span class="at">y =</span> inq_last_6mths)) <span class="sc">+</span></span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Scatterplot of Revolving Balance vs. Inquiries in Last 6 Months"</span>,</span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Revolving Balance"</span>,</span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Inquiries in Last 6 Months"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation between revol_bal and dti</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>correlation <span class="ot">&lt;-</span> <span class="fu">cor</span>(myLCdata<span class="sc">$</span>revol_bal, myLCdata<span class="sc">$</span>dti)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a scatterplot of dti against revol_bal</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(myLCdata<span class="sc">$</span>dti, myLCdata<span class="sc">$</span>revol_bal,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Scatterplot of Debt-to-Income Ratio vs. Revolving Balance"</span>,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">sub =</span> <span class="fu">paste</span>(<span class="st">"Correlation ="</span>, <span class="fu">round</span>(correlation, <span class="dv">2</span>)),</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Debt-to-Income Ratio"</span>,</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Revolving Balance"</span>,</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"blue"</span>,</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">200000</span>))</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Add correlation coefficient to the plot</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> <span class="fu">min</span>(myLCdata<span class="sc">$</span>dti), </span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> <span class="fu">max</span>(myLCdata<span class="sc">$</span>revol_bal),</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">labels =</span> <span class="fu">paste</span>(<span class="st">"Correlation ="</span>, <span class="fu">round</span>(correlation, <span class="dv">2</span>)),</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">4</span>, <span class="at">cex =</span> <span class="fl">0.8</span>, <span class="at">col =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="P1-6-Haeusler_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<div id="fig-SP_T4_121" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="P1-6-Haeusler_files/figure-html/fig-SP_T4_121-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;12: Zoomed in Scatterplot of the two attributes dti and revol_bal</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>As can be seen in <a href="#fig-SP_T4_12">Figure&nbsp;11</a> as well in <a href="#fig-SP_T4_121">Figure&nbsp;12</a>, it looks like the amount of the revolving balance seems is limited to a 40% Debt-to-Income Ratio. Only four observations have been done outside the mentioned 40% limit. As I do not have the data on the income, the analysis of the relationship between the income and the height of the revolving balance cannot be done. However, it can be said that in all cases, besides the outliers, the revolving balance seems to be limited to 40% debt-to-income ratio.</p>
+<p>In a further step, I wanted to investigate, if any further insights could be gained by adding the attribute home_ownership in the visualization of the attributes revol_bal and dti. As already known from <a href="#fig-BP_T4_11">Figure&nbsp;8</a>, home owners with a mortgage tend to have a higher revolving balance. Considering that factor, I would expect that the debt-to-income ratio for home owners with a mortgage would be higher than the one for the observations with the home owner status “Rent”.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation between revol_bal and dti</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>correlation <span class="ot">&lt;-</span> <span class="fu">cor</span>(myLCdata<span class="sc">$</span>revol_bal, myLCdata<span class="sc">$</span>dti)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a scatterplot of dti against revol_bal with home_ownership as color</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(myLCdata, <span class="fu">aes</span>(<span class="at">x =</span> dti, <span class="at">y =</span> revol_bal, <span class="at">color =</span> home_ownership)) <span class="sc">+</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Scatterplot of Debt-to-Income Ratio vs. Revolving Balance"</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">"Correlation ="</span>, <span class="fu">round</span>(correlation, <span class="dv">2</span>)),</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Debt-to-Income Ratio"</span>,</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Revolving Balance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-SP_T4_21" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="P1-6-Haeusler_files/figure-html/fig-SP_T4_21-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;13: Scatterplot showing the distribution of the attribute revol_bal, dti and home_ownership</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In <a href="#fig-SP_T4_21">Figure&nbsp;13</a>, observations with the home owner status “Mortgage” have in general a higher revolving balance than observation with the home owner status “Rent”. This disparity could be due to the increased financial obligations associated with mortgage payments. Depending on the time frame in which the data was collected, this may indicate a trend for home owners with mortgages to maintain a higher revolving balance to cover their daily expenses. However, no further insights can be gained by considering the attribute debt-to income-ratio. Additionally, observations with the home owner status “Own” seems to be more distributed and therefore, it is more difficult to recognize a trend.</p>
+</section>
+<section id="further-exploration-1" class="level2">
+<h2 class="anchored" data-anchor-id="further-exploration-1">Further Exploration</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exclude rows with missing values in dti and inq_last_6mths</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>complete_cases <span class="ot">&lt;-</span> <span class="fu">complete.cases</span>(myLCdata<span class="sc">$</span>dti, myLCdata<span class="sc">$</span>inq_last_6mths)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>dti <span class="ot">&lt;-</span> myLCdata<span class="sc">$</span>dti[complete_cases]</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>inq_last_6mths <span class="ot">&lt;-</span> myLCdata<span class="sc">$</span>inq_last_6mths[complete_cases]</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation between dti and inq_last_6mths</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>correlation_3 <span class="ot">&lt;-</span> <span class="fu">cor</span>(dti, inq_last_6mths)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a scatterplot of dti against inq_last_6mths</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(inq_last_6mths, dti,</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Scatterplot of Debt-to-Income Ratio vs. Inquiries in Last 6 Months"</span>,</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">sub =</span> <span class="fu">paste</span>(<span class="st">"Correlation ="</span>, <span class="fu">round</span>(correlation_3, <span class="dv">2</span>)),</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Inquiries in Last 6 Months"</span>,</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Debt-to-Income Ratio"</span>,</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-SP_dti_inq_last_6mths" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="P1-6-Haeusler_files/figure-html/fig-SP_dti_inq_last_6mths-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;14: Scatterplot of the two attributes dti and inq_last_6mths</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exclude rows with missing values in inq_last_6mths and pub_rec</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>complete_cases <span class="ot">&lt;-</span> <span class="fu">complete.cases</span>(myLCdata<span class="sc">$</span>inq_last_6mths, myLCdata<span class="sc">$</span>pub_rec)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>inq_last_6mths <span class="ot">&lt;-</span> myLCdata<span class="sc">$</span>inq_last_6mths[complete_cases]</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>pub_rec <span class="ot">&lt;-</span> myLCdata<span class="sc">$</span>pub_rec[complete_cases]</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation between inq_last_6mths and pub_rec</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>correlation_2 <span class="ot">&lt;-</span> <span class="fu">cor</span>(inq_last_6mths, pub_rec)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a scatterplot of pub_rec against inq_last_6mths</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(inq_last_6mths, pub_rec,</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Scatterplot of Inquiries in Last 6 Months vs. Public Records"</span>,</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">sub =</span> <span class="fu">paste</span>(<span class="st">"Correlation ="</span>, <span class="fu">round</span>(correlation_2, <span class="dv">2</span>)),</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Inquiries in Last 6 Months"</span>,</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Public Records"</span>,</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-SP_inq_last_6mths_pub_rec" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="P1-6-Haeusler_files/figure-html/fig-SP_inq_last_6mths_pub_rec-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;15: Histogram showing the distribution of the attribute revol_bal</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation between pub_rec and dti</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>correlation <span class="ot">&lt;-</span> <span class="fu">cor</span>(myLCdata<span class="sc">$</span>pub_rec, myLCdata<span class="sc">$</span>inq_last_6mths)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a scatterplot of inq_last_6mths against pub_rec with home_ownership as color</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(myLCdata, <span class="fu">aes</span>(<span class="at">x =</span> inq_last_6mths, <span class="at">y =</span> pub_rec, <span class="at">color =</span> home_ownership)) <span class="sc">+</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Scatterplot of Inquiries in the last 6 months vs. Public Recrods incl. status of home ownership "</span>,</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">"Correlation ="</span>, <span class="fu">round</span>(correlation, <span class="dv">2</span>)),</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Inquiries in the last 6 months"</span>,</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Public Records"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-SP_T4_22" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="P1-6-Haeusler_files/figure-html/fig-SP_T4_22-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;16: Scatterplot showing the distribution of the attribute inq_last_6mths, pub_rec and home_ownership</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation between pub_rec and dti</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>correlation <span class="ot">&lt;-</span> <span class="fu">cor</span>(myLCdata<span class="sc">$</span>pub_rec, myLCdata<span class="sc">$</span>inq_last_6mths)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a scatterplot of inq_last_6mths against pub_rec with home_ownership as color</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(myLCdata, <span class="fu">aes</span>(<span class="at">x =</span> inq_last_6mths, <span class="at">y =</span> pub_rec, <span class="at">color =</span> home_ownership)) <span class="sc">+</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Scatterplot of Inquiries in the last 6 months vs. Public Recrods incl. status of home ownership "</span>,</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">"Correlation ="</span>, <span class="fu">round</span>(correlation, <span class="dv">2</span>)),</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Inquiries in the last 6 months"</span>,</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Public Records"</span>) <span class="sc">+</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">15</span>)) <span class="sc">+</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-SP_T4_221" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="P1-6-Haeusler_files/figure-html/fig-SP_T4_221-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;17: Zoomed in Scatterplot of Figure</figcaption>
+</figure>
+</div>
 </div>
 </div>
 </section>
