@@ -103,7 +103,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#task-3" id="toc-task-3" class="nav-link" data-scroll-target="#task-3">Task 3</a>
   <ul>
-  <li><a href="#task-description-2" id="toc-task-description-2" class="nav-link" data-scroll-target="#task-description-2">Task Description:</a>
+  <li><a href="#task-description-2" id="toc-task-description-2" class="nav-link" data-scroll-target="#task-description-2">Task Description</a>
   <ul class="collapse">
   <li><a href="#analysis-1" id="toc-analysis-1" class="nav-link" data-scroll-target="#analysis-1">Analysis</a>
   <ul class="collapse">
@@ -117,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#task-4" id="toc-task-4" class="nav-link" data-scroll-target="#task-4">Task 4</a>
   <ul>
-  <li><a href="#task-description-3" id="toc-task-description-3" class="nav-link" data-scroll-target="#task-description-3">Task Description:</a></li>
+  <li><a href="#task-description-3" id="toc-task-description-3" class="nav-link" data-scroll-target="#task-description-3">Task Description</a></li>
   <li><a href="#further-exploration-1" id="toc-further-exploration-1" class="nav-link" data-scroll-target="#further-exploration-1">Further Exploration</a></li>
   </ul></li>
   </ul>
@@ -172,7 +172,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>LCdata <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">"LCdata.csv"</span>)</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>myLCdata <span class="ot">&lt;-</span> LCdata <span class="sc">%&gt;%</span> <span class="fu">sample</span>(<span class="dv">5</span>) <span class="sc">%&gt;%</span> <span class="fu">slice_sample</span>(<span class="at">prop =</span> .<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>myLCdata <span class="ot">&lt;-</span> LCdata <span class="sc">%&gt;%</span> <span class="fu">sample</span>(<span class="dv">5</span>) <span class="sc">%&gt;%</span> <span class="fu">slice_sample</span>(<span class="at">prop =</span> .<span class="dv">5</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(myLCdata, <span class="st">"myLCdata.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="task-1" class="level1">
@@ -537,7 +538,7 @@ A revolving credit is a credit line that remains available even as you pay the b
 <section id="task-3" class="level1">
 <h1>Task 3</h1>
 <section id="task-description-2" class="level2">
-<h2 class="anchored" data-anchor-id="task-description-2">Task Description:</h2>
+<h2 class="anchored" data-anchor-id="task-description-2">Task Description</h2>
 <p>Choose at least one suitable diagram type (e.g.&nbsp;a histogram, a scatterplot) for each of the 5 attributes in your data set and visualize it using ggplot2. Give your plots a professional look (e.g., add a title, make the axes labels readable, add the measurement units if available).</p>
 <p>Interpret each of your plots:</p>
 <p>• What information can you read off the diagram type you chose (e.g.&nbsp;in a histogram you can read off range, distribution, etc.)?</p>
@@ -574,7 +575,7 @@ A revolving credit is a credit line that remains available even as you pay the b
 </div>
 <section id="inq_last_6mths-1" class="level4">
 <h4 class="anchored" data-anchor-id="inq_last_6mths-1">inq_last_6mths</h4>
-<p>For the number of inquiries in the last 6 months, the assumption done in task 2 can be confirmed as the majority of observations lies between 0 up to 2 inquiries. Only a small number of observation have more than 2 inquiries in the last 6 months. As the range of the number of inquires has been limited to 8, 7 observations are not visualized in the histogram. <a href="#fig-Hist_inq_last_6mth">Figure&nbsp;1</a> may indicate that either the first or second inquiry is successful and therefore, not an additional one is done. Or, that the majority of people who are interested in a loan form LC consider other financing possibilities after 2 denied requests.</p>
+<p>For the number of inquiries in the last 6 months, the assumption done in task 2 can be confirmed as the majority of observations lies between 0 up to 2 inquiries. Only a small number of observation have more than 2 inquiries in the last 6 months. As the range of the number of inquires has been limited to 8, 7 observations are not visualized in the histogram. <a href="#fig-Hist_inq_last_6mth">Figure&nbsp;1</a> may indicate that either the first or second inquiry is successful and therefore, not an additional inquire is done. Or, that the majority of people who are interested in a loan form LC consider other financing possibilities after 2 denied requests.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the number of missing values in pub_rec</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>num_missing <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(myLCdata<span class="sc">$</span>pub_rec))</span>
@@ -631,7 +632,7 @@ A revolving credit is a credit line that remains available even as you pay the b
 </section>
 <section id="revol_bal-1" class="level4">
 <h4 class="anchored" data-anchor-id="revol_bal-1">revol_bal</h4>
-<p>For the visualization of the credit revolving balance, the amount of balances has been limited to USD 300’000, leading to 19 observation not being displayed. The assumption of a right-skewed distribution seems to be correct. Additionally, it is visible that the majority of observation have a revolving balance between USD 0 and USD 100’000. You may interpret the result that observation with an revolving balance over USD 100’000 are not ordinary.</p>
+<p>For the visualization of the credit revolving balance, the amount of balances has been limited to USD 300’000, leading to 19 observation not being displayed. The assumption of a right-skewed distribution seems to be correct. Additionally, it is visible that the majority of observation have a revolving balance between USD 0 and USD 100’000 as shown in <a href="#fig-Hist_revol_bal">Figure&nbsp;3</a>. You may interpret the result that observation with an revolving balance over USD 100’000 are not ordinary.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a histogram for dti</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(myLCdata<span class="sc">$</span>dti,</span>
@@ -666,7 +667,7 @@ A revolving credit is a credit line that remains available even as you pay the b
 </section>
 <section id="dti-1" class="level4">
 <h4 class="anchored" data-anchor-id="dti-1">dti</h4>
-<p>The box plot diagram confirms the calculated median of 18.14 from Task 2. Furthermore, you can well see 4 outlier observations which are depicted as dots in <a href="#fig-BP_dti">Figure&nbsp;5</a>. Additionally, in <a href="#fig-Hist_dti">Figure&nbsp;4</a>, the main observations have a debt-to-income ratio between 0 to 40 . Between those two numbers, the distribution looks similar to an univariate distribution.</p>
+<p>The box plot diagram, <a href="#fig-BP_dti">Figure&nbsp;5</a>, confirms the calculated median of 18.14 from Task 2. Furthermore, you can well see 4 outlier observations which are depicted as dots in <a href="#fig-BP_dti">Figure&nbsp;5</a>. Additionally, in <a href="#fig-Hist_dti">Figure&nbsp;4</a>, the main observations have a debt-to-income ratio between 0 to 40 . Between those two numbers, the distribution looks similar to an univariate distribution.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert home_ownership to factor </span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>myLCdata<span class="sc">$</span>home_ownership <span class="ot">&lt;-</span> <span class="fu">factor</span>(myLCdata<span class="sc">$</span>home_ownership, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"RENT"</span>, <span class="st">"OWN"</span>, <span class="st">"MORTGAGE"</span>, <span class="st">"OTHER"</span>, <span class="st">"ANY"</span>, <span class="st">"NONE"</span>))</span>
@@ -699,7 +700,7 @@ A revolving credit is a credit line that remains available even as you pay the b
 </section>
 <section id="home_ownership-1" class="level4">
 <h4 class="anchored" data-anchor-id="home_ownership-1">home_ownership</h4>
-<p>The histogram of the variable “home_ownership” confirms the calculated distribution in percentage of Task 2. The two categories “Mortgage” and “Rent” are the most common ones, which are as well the most common living situation in considering today’s society.</p>
+<p>The histogram <a href="#fig-Hist_home_ownership">Figure&nbsp;6</a> of the variable “home_ownership” confirms the calculated distribution in percentage of Task 2. The two categories “Mortgage” and “Rent” are the most common ones, which are as well the most common living situation in considering today’s society.</p>
 </section>
 </section>
 </section>
@@ -707,7 +708,7 @@ A revolving credit is a credit line that remains available even as you pay the b
 <section id="task-4" class="level1">
 <h1>Task 4</h1>
 <section id="task-description-3" class="level2">
-<h2 class="anchored" data-anchor-id="task-description-3">Task Description:</h2>
+<h2 class="anchored" data-anchor-id="task-description-3">Task Description</h2>
 <p>In task 3, you looked at each variable separately. Now the goal is to see if there are some obvious correlations or patterns when looking at pairs of variables.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>myLCdata_clean <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(myLCdata[, <span class="fu">c</span>(<span class="st">"inq_last_6mths"</span>, <span class="st">"pub_rec"</span>, <span class="st">"revol_bal"</span>, <span class="st">"dti"</span>, <span class="st">"home_ownership"</span>)])</span>
@@ -725,7 +726,7 @@ A revolving credit is a credit line that remains available even as you pay the b
 </div>
 </div>
 </div>
-<p>As I couldn’t find a visible correlation in the previously produced Figure, <a href="#fig-Correlation">Figure&nbsp;7</a>, I tried to calculate the correlation of each set of two variables in the following code.</p>
+<p>As I couldn’t find a visible correlation in the previously produced <a href="#fig-Correlation">Figure&nbsp;7</a>, I tried to calculate the correlation of each set of two variables in the following code.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the names of numeric columns</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>numeric_columns <span class="ot">&lt;-</span> <span class="fu">names</span>(myLCdata)[<span class="fu">sapply</span>(myLCdata, is.numeric)]</span>
@@ -812,7 +813,7 @@ A revolving credit is a credit line that remains available even as you pay the b
 </div>
 </div>
 <p>Considering <a href="#fig-BP_T4_11">Figure&nbsp;8</a>, a small difference between people owning a property, either with or without mortgage, and people who are renting can be seen. Furthermore, the observations with the home ownership status “Mortgage” tend to have a higher Revolving Balance. This may be due to more financial obligations due to the mortgage payment. Therefore, people may request a higher revolving balance (resp. a higher credit card limit) so they are able to pay their daily bills.</p>
-<p>In the next step, I wanted to analysis if there is a visible difference between the home ownership status and the number of public records. My first assumption is that people who live in their own property have a smaller number of public record entries as they may have more stability in their life.</p>
+<p>In the next step, I wanted to analyse if there is a visible difference between the home ownership status and the number of public records. My first assumption is that people who live in their own property have a smaller number of public record entries as they may have more stability in their life.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a box plot of revol_bal grouped by home_ownership</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(pub_rec <span class="sc">~</span> home_ownership, <span class="at">data =</span> myLCdata,</span>
@@ -824,7 +825,7 @@ A revolving credit is a credit line that remains available even as you pay the b
 <div id="fig-BP_T4_13" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="P1-6-Haeusler_files/figure-html/fig-BP_T4_13-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;9: Boxplotof the two attribute pub_rec and home_ownership</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;9: Boxplot of the two attribute pub_rec and home_ownership</figcaption>
 </figure>
 </div>
 </div>
@@ -832,7 +833,7 @@ A revolving credit is a credit line that remains available even as you pay the b
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a box plot of pub_rec grouped by home_ownership</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(pub_rec <span class="sc">~</span> home_ownership, <span class="at">data =</span> myLCdata,</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Boxplot of Public Records by Home Ownership"</span>,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Zoomed in Boxplot of Public Records by Home Ownership"</span>,</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Home Ownership"</span>,</span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Public Records"</span>,</span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">"skyblue"</span>,</span>
@@ -847,7 +848,7 @@ A revolving credit is a credit line that remains available even as you pay the b
 </div>
 </div>
 <p>However, as shown in <a href="#fig-BP_T4_13">Figure&nbsp;9</a> and <a href="#fig-BP_T4_14">Figure&nbsp;10</a>, no significant difference can be detected. Only the number of the outliers may differ. However, as outliers are observation which vary greatly from the other observations, these points will not be considered for comparison.</p>
-<p>Additionally, I wanted to further explore the relationship between the two attributes debt-to-income and revolving balance. As described in task 1, dti considers the total monthly debt payments on the total debt obligations in its calculation. However, as described in the LC Data Dictionary, the revolving balance is typically the credit card. As the payment system in the US varies from the one in Switzerland, it is difficult to understand how the “open” revolving balance would be considered in the debt-to-income ratio. In my understanding, people with a high income are more likely to get a high revolving balance granted. Nonetheless, the debt-to-income ratio should be remain in the same range.</p>
+<p>Additionally, I wanted to further explore the relationship between the two attributes debt-to-income and revolving balance. As described in task 1, dti considers the total monthly debt payments on the total debt obligations in its calculation. However, as described in the LC Data Dictionary, the revolving balance is typically the credit card. As the payment system in the US varies from the one in Switzerland, it is difficult to understand how the “open” revolving balance would be considered in the debt-to-income ratio. In my understanding, people with a high income are more likely to get a high revolving balance granted. Nonetheless, the debt-to-income ratio should be in the same range.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation between revol_bal and dti</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>correlation <span class="ot">&lt;-</span> <span class="fu">cor</span>(myLCdata<span class="sc">$</span>revol_bal, myLCdata<span class="sc">$</span>dti)</span>
@@ -858,13 +859,7 @@ A revolving credit is a credit line that remains available even as you pay the b
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">sub =</span> <span class="fu">paste</span>(<span class="st">"Correlation ="</span>, <span class="fu">round</span>(correlation, <span class="dv">2</span>)),</span>
 <span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Debt-to-Income Ratio"</span>,</span>
 <span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Revolving Balance"</span>,</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"blue"</span>)</span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Add correlation coefficient to the plot</span></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> <span class="fu">min</span>(myLCdata<span class="sc">$</span>dti), </span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> <span class="fu">max</span>(myLCdata<span class="sc">$</span>revol_bal),</span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">labels =</span> <span class="fu">paste</span>(<span class="st">"Correlation ="</span>, <span class="fu">round</span>(correlation, <span class="dv">2</span>)),</span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">4</span>, <span class="at">cex =</span> <span class="fl">0.8</span>, <span class="at">col =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-SP_T4_12" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -885,13 +880,7 @@ A revolving credit is a credit line that remains available even as you pay the b
 <span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Debt-to-Income Ratio"</span>,</span>
 <span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Revolving Balance"</span>,</span>
 <span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"blue"</span>,</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">200000</span>))</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Add correlation coefficient to the plot</span></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> <span class="fu">min</span>(myLCdata<span class="sc">$</span>dti), </span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> <span class="fu">max</span>(myLCdata<span class="sc">$</span>revol_bal),</span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">labels =</span> <span class="fu">paste</span>(<span class="st">"Correlation ="</span>, <span class="fu">round</span>(correlation, <span class="dv">2</span>)),</span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">4</span>, <span class="at">cex =</span> <span class="fl">0.8</span>, <span class="at">col =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">200000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-SP_T4_121" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -901,7 +890,7 @@ A revolving credit is a credit line that remains available even as you pay the b
 </div>
 </div>
 </div>
-<p>As can be seen in <a href="#fig-SP_T4_12">Figure&nbsp;11</a> as well in <a href="#fig-SP_T4_121">Figure&nbsp;12</a>, it looks like the amount of the revolving balance seems is limited to a 40% Debt-to-Income Ratio. Only four observations have been done outside the mentioned 40% limit. As I do not have the data on the income, the analysis of the relationship between the income and the height of the revolving balance cannot be done. However, it can be said that in all cases, besides the outliers, the revolving balance seems to be limited to 40% debt-to-income ratio.</p>
+<p>As can be seen in <a href="#fig-SP_T4_12">Figure&nbsp;11</a> as well in <a href="#fig-SP_T4_121">Figure&nbsp;12</a>, it looks like the amount of the revolving balance seems is limited to a 40% Debt-to-Income Ratio. Only four observations are outside the mentioned 40% limit. As I do not have the data on the income, the analysis of the relationship between the income and the height of the revolving balance cannot be done. However, it can be said that in all cases, besides the outliers, the revolving balance seems to be limited to 40% debt-to-income ratio.</p>
 <p>In a further step, I wanted to investigate, if any further insights could be gained by adding the attribute home_ownership in the visualization of the attributes revol_bal and dti. As already known from <a href="#fig-BP_T4_11">Figure&nbsp;8</a>, home owners with a mortgage tend to have a higher revolving balance. Considering that factor, I would expect that the debt-to-income ratio for home owners with a mortgage would be higher than the one for the observations with the home owner status “Rent”.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation between revol_bal and dti</span></span>
@@ -913,7 +902,9 @@ A revolving credit is a credit line that remains available even as you pay the b
 <span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Scatterplot of Debt-to-Income Ratio vs. Revolving Balance"</span>,</span>
 <span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">"Correlation ="</span>, <span class="fu">round</span>(correlation, <span class="dv">2</span>)),</span>
 <span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Debt-to-Income Ratio"</span>,</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Revolving Balance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Revolving Balance"</span>,</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="fu">paste</span>(<span class="st">"Correlation ="</span>, <span class="fu">round</span>(correlation, <span class="dv">2</span>))) <span class="sc">+</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-SP_T4_21" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -978,43 +969,17 @@ A revolving credit is a credit line that remains available even as you pay the b
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation between pub_rec and dti</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>correlation <span class="ot">&lt;-</span> <span class="fu">cor</span>(myLCdata<span class="sc">$</span>pub_rec, myLCdata<span class="sc">$</span>inq_last_6mths)</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a scatterplot of inq_last_6mths against pub_rec with home_ownership as color</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(myLCdata, <span class="fu">aes</span>(<span class="at">x =</span> inq_last_6mths, <span class="at">y =</span> pub_rec, <span class="at">color =</span> home_ownership)) <span class="sc">+</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Scatterplot of Inquiries in the last 6 months vs. Public Recrods incl. status of home ownership "</span>,</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">"Correlation ="</span>, <span class="fu">round</span>(correlation, <span class="dv">2</span>)),</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Inquiries in the last 6 months"</span>,</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Public Records"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a scatterplot of inq_last_6mths against pub_rec with home_ownership as color</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(myLCdata, <span class="fu">aes</span>(<span class="at">x =</span> inq_last_6mths, <span class="at">y =</span> pub_rec, <span class="at">color =</span> home_ownership)) <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Scatterplot of Inquiries in the last 6 months vs. Public Recrods incl. status of home ownership "</span>,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Inquiries in the last 6 months"</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Public Records"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-SP_T4_22" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="P1-6-Haeusler_files/figure-html/fig-SP_T4_22-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption class="figure-caption">Figure&nbsp;16: Scatterplot showing the distribution of the attribute inq_last_6mths, pub_rec and home_ownership</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation between pub_rec and dti</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>correlation <span class="ot">&lt;-</span> <span class="fu">cor</span>(myLCdata<span class="sc">$</span>pub_rec, myLCdata<span class="sc">$</span>inq_last_6mths)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a scatterplot of inq_last_6mths against pub_rec with home_ownership as color</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(myLCdata, <span class="fu">aes</span>(<span class="at">x =</span> inq_last_6mths, <span class="at">y =</span> pub_rec, <span class="at">color =</span> home_ownership)) <span class="sc">+</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Scatterplot of Inquiries in the last 6 months vs. Public Recrods incl. status of home ownership "</span>,</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">"Correlation ="</span>, <span class="fu">round</span>(correlation, <span class="dv">2</span>)),</span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Inquiries in the last 6 months"</span>,</span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Public Records"</span>) <span class="sc">+</span></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">15</span>)) <span class="sc">+</span></span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div id="fig-SP_T4_221" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="P1-6-Haeusler_files/figure-html/fig-SP_T4_221-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;17: Zoomed in Scatterplot of Figure</figcaption>
 </figure>
 </div>
 </div>

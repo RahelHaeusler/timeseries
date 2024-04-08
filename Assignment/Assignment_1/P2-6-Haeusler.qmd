@@ -1,0 +1,150 @@
+---
+title: "P2-6-Haeusler"
+author: "Rahel Häusler"
+date: 05.08.2024 (deadline)
+format: html
+toc: true
+toc-depth: 4
+lof: true
+lot: true
+editor: visual
+warning: false
+error: false
+tbl-cap-location: top
+fig-cap-location: bottom
+---
+
+## Task 1
+
+```{r}
+library(data.table)
+library(DataExplorer)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+myLCdata <- fread("myLCdata.csv")
+dirty_data <- readRDS("dirtyfy.rds")
+
+myLCdata_dirty <- dirty_data(myLCdata, 6)
+write.csv(myLCdata_dirty, file = "myLCdata_dirty.csv", row.names = FALSE)
+#create_report(myLCdata_dirty)
+```
+
+![Missing Data Profile](images/Missing%20Data%20Profile.png){#fig-missingvalues fig-align="center"}
+
+## Task 2
+
+@fig-missingvalues
+
+```{r}
+custom_summary <- function(data) {
+  # Calculate the number of rows in the data
+  num_rows <- nrow(data)
+  
+  # Define a function to compute outliers
+  compute_outliers <- function(x) {
+    quantiles <- quantile(x, probs = c(0.25, 0.75), na.rm = TRUE)
+    iqr <- quantiles[2] - quantiles[1]
+    lower_fence <- quantiles[1] - 1.5 * iqr
+    upper_fence <- quantiles[2] + 1.5 * iqr
+    x_outliers <- x[x < lower_fence | x > upper_fence]
+    return(length(x_outliers))
+  }
+  
+  # Compute summary statistics for numeric columns
+  summary_stats <- data %>%
+    summarise(across(where(is.numeric), list(
+      num_missing = ~sum(is.na(.))/ num_rows,
+      num_nan = ~sum(is.nan(.))/ num_rows,
+      num_outliers = ~compute_outliers(.)/ num_rows
+    )))
+  
+  return(summary_stats)
+}
+
+# Apply custom_summary function to myLCdata
+summary_results <- custom_summary(myLCdata)
+print(summary_results)
+transposed_summary <- t(summary_results)
+print(transposed_summary)
+
+```
+
+```{r}
+# Load necessary library
+library(dplyr)
+
+# Define a custom_summary function to calculate summary statistics in relative counts
+custom_summary_num <- function(data) {
+  # Calculate the number of rows in the data
+  num_rows <- nrow(data)
+  
+  # Define a function to calculate relative counts
+  calculate_relative_counts <- function(x) {
+    return(sum(!is.na(x)) / num_rows)
+  }
+  
+  # Compute summary statistics for numeric columns with relative counts
+  summary_stats <- data %>%
+    summarise(across(where(is.numeric), list(
+      num_missing = ~sum(is.na(.)),
+      num_nan = ~sum(is.nan(.), na.rm = TRUE),
+      num_outliers = ~sum(. %in% boxplot.stats(.)$out, na.rm = TRUE)
+    ), .names = "{.col}.{fn}"))
+  
+  return(summary_stats)
+}
+
+# Apply custom_summary function to myLCdata_dirty
+summary_results_num <- custom_summary_num(myLCdata_dirty)
+print(summary_results_num)
+
+
+```
+
+```{r}
+custom_summary_char <- function(data) {
+  # Calculate the number of rows in the data
+  num_rows <- nrow(data)
+  
+  # Compute summary statistics for character columns with relative counts
+  summary_stats <- data %>%
+    summarise(across(where(is.character),
+                     .fns = list(
+                       char_missing = ~sum(is.na(.)),
+                       char_nan = ~sum(. == "n/a", na.rm = TRUE),
+                       char_space = ~sum(. == " ", na.rm = TRUE),
+                       char_empty_string = ~sum(. == "", na.rm = TRUE)
+                     ), .names = "{.col}.{fn}"))
+  
+  return(summary_stats)
+}
+
+summary_results_char <- custom_summary_char(myLCdata_dirty)
+print(summary_results_char)
+
+
+```
+
+```{r}
+num_rows <- nrow(myLCdata_dirty)
+
+relative <- function(df) {
+  df <- df / num_rows
+  return(df)
+}
+
+summary_relative_char <- relative(summary_results_char)
+summary_relative_num <- relative(summary_results_num)
+print(summary_relative_char)
+print(summary_relative_num)
+
+```
+
+```{r}
+
+
+
+
+```
