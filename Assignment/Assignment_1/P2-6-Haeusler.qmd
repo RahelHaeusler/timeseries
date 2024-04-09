@@ -33,43 +33,13 @@ write.csv(myLCdata_dirty, file = "myLCdata_dirty.csv", row.names = FALSE)
 
 ![Missing Data Profile](images/Missing%20Data%20Profile.png){#fig-missingvalues fig-align="center"}
 
+```{r}
+print(sapply(myLCdata_dirty, class))
+```
+
 ## Task 2
 
 @fig-missingvalues
-
-```{r}
-custom_summary <- function(data) {
-  # Calculate the number of rows in the data
-  num_rows <- nrow(data)
-  
-  # Define a function to compute outliers
-  compute_outliers <- function(x) {
-    quantiles <- quantile(x, probs = c(0.25, 0.75), na.rm = TRUE)
-    iqr <- quantiles[2] - quantiles[1]
-    lower_fence <- quantiles[1] - 1.5 * iqr
-    upper_fence <- quantiles[2] + 1.5 * iqr
-    x_outliers <- x[x < lower_fence | x > upper_fence]
-    return(length(x_outliers))
-  }
-  
-  # Compute summary statistics for numeric columns
-  summary_stats <- data %>%
-    summarise(across(where(is.numeric), list(
-      num_missing = ~sum(is.na(.))/ num_rows,
-      num_nan = ~sum(is.nan(.))/ num_rows,
-      num_outliers = ~compute_outliers(.)/ num_rows
-    )))
-  
-  return(summary_stats)
-}
-
-# Apply custom_summary function to myLCdata
-summary_results <- custom_summary(myLCdata)
-print(summary_results)
-transposed_summary <- t(summary_results)
-print(transposed_summary)
-
-```
 
 ```{r}
 # Load necessary library
@@ -77,14 +47,6 @@ library(dplyr)
 
 # Define a custom_summary function to calculate summary statistics in relative counts
 custom_summary_num <- function(data) {
-  # Calculate the number of rows in the data
-  num_rows <- nrow(data)
-  
-  # Define a function to calculate relative counts
-  calculate_relative_counts <- function(x) {
-    return(sum(!is.na(x)) / num_rows)
-  }
-  
   # Compute summary statistics for numeric columns with relative counts
   summary_stats <- data %>%
     summarise(across(where(is.numeric), list(
@@ -105,9 +67,7 @@ print(summary_results_num)
 
 ```{r}
 custom_summary_char <- function(data) {
-  # Calculate the number of rows in the data
-  num_rows <- nrow(data)
-  
+
   # Compute summary statistics for character columns with relative counts
   summary_stats <- data %>%
     summarise(across(where(is.character),
@@ -143,8 +103,50 @@ print(summary_relative_num)
 ```
 
 ```{r}
+format_change <- function(df) {
+  new_df <- df %>%
+    pivot_longer(
+      cols = everything(),
+      names_to = "attribute", 
+      values_to = "value"
+    ) %>%
+    separate(attribute, into = c("attribute", "metric"), sep = "\\.", remove = FALSE) %>%
+    pivot_wider(
+      names_from = metric,
+      values_from = value
+    ) %>%
+    arrange(attribute)
+  
+  return(new_df)
+}
 
+final_char <- format_change(summary_relative_char)
+final_num <- format_change(summary_relative_num)
+print(final_char)
+print(final_num)
+```
 
+## Visualization
 
+```{r}
+visualize <- function(df) {
+  # Melt the dataframe to long format
+  final_num_long <- tidyr::pivot_longer(df, cols = -attribute, names_to = "calculation", values_to = "percentage")
 
+  # Create the plot
+  plot <- ggplot(final_num_long, aes(x = percentage, y = attribute, fill = attribute)) +
+    geom_bar(stat = "identity", position = "dodge") +
+    scale_x_continuous(labels = scales::percent) +
+    labs(y = "Attribute", x = "Percentage", title = "Percentage Calculation by Attribute") +
+    facet_wrap(~calculation, scales = "free_x", ncol = 1) +  # Facet by calculation and set facet label as calculation
+    theme_minimal() +
+    theme(legend.position = "none")  # Remove legend
+  
+  return(plot)
+}
+
+plot.num <- visualize(final_num)
+print(plot.num)
+plot.char <- visualize(final_char)
+print(plot.char)
 ```
